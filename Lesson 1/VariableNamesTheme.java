@@ -3,31 +3,31 @@ public class VariableNamesTheme {
         System.out.println("\n1.Разные переменные\n");
 
         //Цифра
-        byte digit = 7;
+        int digit = 7;
         System.out.println("\nЦифра = " + digit);
 
         //Сумма чисел
-        byte sumNums = 33 + 55;
+        int sumNums = 33 + 55;
         System.out.println("\nСумма чисел = " + sumNums);
 
         //Произведение цифр
-        byte multiplicationDigits = 3 * 5;
+        int multiplicationDigits = 3 * 5;
         System.out.println("\nПроизведение цифр = " + multiplicationDigits);
 
         //Максимальное число
-        byte maxNum = 127;
+        int maxNum = 127;
         System.out.println("\nМаксимальное число = " + maxNum);
 
         //Количество десятков
-        byte quantityTens = 5;
+        int quantityTens = 5;
         System.out.println("\nКоличество десятков = " + quantityTens);
 
         //Вес собаки
-        float weightDog = 8.5f;
-        System.out.println("\nВес собаки = " + weightDog);
+        float dogWeight = 8.5f;
+        System.out.println("\nВес собаки = " + dogWeight);
 
         //Исходное число
-        byte originalNum = 9;
+        int originalNum = 9;
         System.out.println("\nИсходное число = " + originalNum);
 
         //Процент по вкладу
@@ -43,19 +43,19 @@ public class VariableNamesTheme {
         System.out.println("\nКод ошибки = " + errorCode);
 
         //Тип сообщения
-        String typeMessage = "Важное";
-        System.out.println("\nТип сообщения = " + typeMessage);
+        String messageType = "Важное";
+        System.out.println("\nТип сообщения = " + messageType);
 
         //Число нулей
-        byte numZeros = 7;
+        int numZeros = 7;
         System.out.println("\nЧисло нулей = " + numZeros);
 
         //Уникальное число
-        short uniqueNum = 666;
+        int uniqueNum = 666;
         System.out.println("\nУникальное число = " + uniqueNum);
 
         //Случайное число
-        byte randomNum = 1;
+        int randomNum = 1;
         System.out.println("\nСлучайное число = " + randomNum);
 
         //Математическое выражение
@@ -67,16 +67,16 @@ public class VariableNamesTheme {
         System.out.println("\nВыбор = " + choise);
 
         //Счет (в игре)
-        byte score = 3;
+        int score = 3;
         System.out.println("\nСчет = " + score);
 
         //Максимальная длина (строки)
-        byte maxLength = 34;
+        int maxLength = 34;
         System.out.println("\nМаксимальная длина = " + maxLength);
 
         //Пункт меню
-        String itemMain = "Панель задач";
-        System.out.println("\nПункт меню = " + itemMain);
+        String menuItem = "Панель задач";
+        System.out.println("\nПункт меню = " + menuItem);
 
         //Стоимость кофе на вынос
         String costCoffeeTakeOut = "2$";
@@ -87,7 +87,7 @@ public class VariableNamesTheme {
         System.out.println("\nДата начала = " + startDate);
 
         //Окончание диапазона
-        short endRange = 32_767;
+        int endRange = 32_767;
         System.out.println("\nОкончание диапазона = " + endRange);
 
         //Полное имя работника месяца
@@ -103,11 +103,11 @@ public class VariableNamesTheme {
         System.out.println("\nРазмер = " + size);
 
         //Вместимость (чего-либо)
-        byte capacity = 99;
+        int capacity = 99;
         System.out.println("\nВместимость = " + capacity);
 
         //Счетчик
-        byte counter = 54;
+        int counter = 54;
         System.out.println("\nСчетчик = " + counter);
 
         //Путь до файла
@@ -115,7 +115,7 @@ public class VariableNamesTheme {
         System.out.println("\nПуть до файла = " + pathFile);
 
         //Количество чисел в каждой строке
-        byte quantityNumsEachLine = 127;
+        int quantityNumsEachLine = 127;
         System.out.println("\nКоличество чисел в каждой строке = " + quantityNumsEachLine);
 
         System.out.println("\n\n2.boolean-переменные\n");
@@ -129,8 +129,8 @@ public class VariableNamesTheme {
         System.out.println("\nКомпьютер включен? " + isCopmuterOn);
 
         //Есть равные цифры?
-        boolean isAvailableEqualNums = false;
-        System.out.println("\nЕсть равные цифры? " + isAvailableEqualNums);
+        boolean hasEqualsNums = false;
+        System.out.println("\nЕсть равные цифры? " + hasEqualsNums);
 
         //(что-либо) создано?
         boolean isCreated = true;
@@ -153,8 +153,8 @@ public class VariableNamesTheme {
         System.out.println("\nЭлектронная почта действительная? " + isEmailValid);
 
         //Имеются уникальные строки?
-        boolean isAvailableUniqueStrings = true;
-        System.out.println("\nИмеются уникальные строки? " + isAvailableUniqueStrings);
+        boolean hasUniqueStrings = true;
+        System.out.println("\nИмеются уникальные строки? " + hasUniqueStrings);
 
         System.out.println("\n\n3.Аббревиатуры\n");
 
@@ -163,12 +163,12 @@ public class VariableNamesTheme {
         System.out.println("\nСтарый universally unique identifier = " + oldUuid);
 
         //Производитель оперативной памяти
-        String manufacturerRam = "Kingston";
-        System.out.println("\nПроизводитель оперативной памяти = " + manufacturerRam);
+        String ramManufacturer = "Kingston";
+        System.out.println("\nПроизводитель оперативной памяти = " + ramManufacturer);
 
         //Емкость жесткого диска
-        String capacityHdd = "256G";
-        System.out.println("\nЕмкость жесткого диска = " + capacityHdd);
+        String hddCapacity = "256G";
+        System.out.println("\nЕмкость жесткого диска = " + hddCapacity);
 
         //Протокол передачи гипертекста
         String http = "username=Иван&group=8И2А&message=startjava";
@@ -179,8 +179,8 @@ public class VariableNamesTheme {
         System.out.println("\nСокращенный uniform resource locator = " + shortcutUrl);
 
         //Новый идентификатор клиента
-        String newIdClient = "0234";
-        System.out.println("\nНовый идентификатор клиента = " + newIdClient);
+        String newClientId = "0234";
+        System.out.println("\nНовый идентификатор клиента = " + newClientId);
 
         //Кодировка american standard code for information interchange
         char codeAscii = '@';
