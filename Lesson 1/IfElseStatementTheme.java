@@ -17,14 +17,14 @@ public class IfElseStatementTheme {
             System.out.println("Вы не являетесь совершеннолетним!");
         }
 
-        if (height < 1.8){
+        if (height < 1.8) {
             System.out.println("Этот мир слишком большой для Вас!");
         } else {
             System.out.println("Как погодка на такой высоте?");
         }
 
         char firstNameLetter = "Александр".charAt(0);
-        if (firstNameLetter == 'M'){
+        if (firstNameLetter == 'M') {
             System.out.println("Max?");
         } else if (firstNameLetter == 'I') {
             System.out.println("Iгорь?");
@@ -47,15 +47,15 @@ public class IfElseStatementTheme {
         System.out.println("\n3.Проверка числа\n");
 
         int num = -229;
-        String parity;
-        String sign;
         if (num == 0) {
-            System.out.println(num + " является нулём!");
+            System.out.println("Число является нулём!");
         } else {
+            String parity;
+            String sign;
             if (num % 2 == 0) {
-            parity ="четным";
+                parity = "четным";
             } else {
-                parity ="нечетным";
+                parity = "нечетным";
             }
             if (num > 0) {
                 sign = "положительным";
@@ -67,29 +67,27 @@ public class IfElseStatementTheme {
 
         System.out.println("\n4.Поиск одинаковых цифр в числах\n");
 
-        int num01 = 123;
-        int num02 = 223;
-        boolean equalRank1 = num01 % 10 == num02 % 10;
-        boolean equalRank2 = num01 % 100 / 10 == num02 % 100 / 10;
-        boolean equalRank3 = num01 / 100 == num02 / 100;
-        String identicalDigits = "";
-        String ranks = "";
-        if (!equalRank1 && !equalRank2 && !equalRank3) {
-            System.out.println("Числа " + num01 + " и " + num02 +" не имеют равных цифр");
+        boolean hasEqualOnes = num1 % 10 == num2 % 10;
+        boolean hasEqualTens = num1 % 100 / 10 == num2 % 100 / 10;
+        boolean hasEqualHundreds = num1 / 100 == num2 / 100;
+        if (!hasEqualOnes && !hasEqualTens && !hasEqualHundreds) {
+            System.out.println("Числа " + num1 + " и " + num2 +" не имеют равных цифр");
         } else {
-            if (equalRank1) {
-                identicalDigits += num01 % 10;
+            String identicalDigits = "";
+            String ranks = "";
+            if (hasEqualOnes) {
+                identicalDigits += num1 % 10;
                 ranks += 1;
             }
-            if (equalRank2) {
-                identicalDigits += " " + num01 % 100 / 10;
+            if (hasEqualTens) {
+                identicalDigits += " " + num1 % 100 / 10;
                 ranks += " " + 2;
             }
-            if (equalRank3) {
-                identicalDigits += " " + num01 / 100;
+            if (hasEqualHundreds) {
+                identicalDigits += " " + num1 / 100;
                 ranks += " " + 3;
             }
-            System.out.println("Исходные числа " + num01 + " и " + num02 +
+            System.out.println("Исходные числа " + num1 + " и " + num2 +
                     "\nОдинаковые цифры " + identicalDigits + 
                     "\nНомера разрядов " + ranks);
         }
@@ -130,35 +128,29 @@ public class IfElseStatementTheme {
         System.out.println("\n7.Определение оценки по предметам\n");
 
         float percentHistory = 59f;
-        float percentProgramming = 92f;
-        float averagePercent = (percentHistory + percentProgramming) / 2;
-        float gradeHistory;
-        float gradeProgramming;
+        float gradeHistory = 2;
         if (percentHistory > 91) {
             gradeHistory = 5;
         } else if (percentHistory > 73) {
             gradeHistory = 4;
         } else if (percentHistory > 60) {
             gradeHistory = 3;
-        } else {
-            gradeHistory = 2;
         }
+        float percentProgramming = 92f;
+        float gradeProgramming = 2;
         if (percentProgramming > 91) {
             gradeProgramming = 5;
         } else if (percentProgramming > 73) {
             gradeProgramming = 4;
         } else if (percentProgramming > 60) {
             gradeProgramming = 3;
-        } else {
-            gradeProgramming = 2;
         }
+        float averagePercent = (percentHistory + percentProgramming) / 2;
         float averageGrade = (gradeHistory + gradeProgramming) / 2;
         System.out.println("Оценка по истории: " + gradeHistory +
                 "\nОценка по программированию: " + gradeProgramming +
                 "\nСредний балл оценок по предметам: " + averageGrade +
                 "\nСредний % по предметам: " + averagePercent);
-
-
 
         System.out.println("\n8.Расчет годовой прибыли\n");
 
@@ -168,7 +160,7 @@ public class IfElseStatementTheme {
         int annualProfit = (income - rentPremises - costPrice) * 12;
         String mathSymbol = "";
         if (annualProfit > 0) {
-            mathSymbol += "+";
+            mathSymbol = "+";
         }
         System.out.println("Прибыль за год: " + mathSymbol + annualProfit + " руб.");
     }
