@@ -3,98 +3,86 @@ public class CyclesTheme {
         System.out.println("\n1.Подсчет суммы четных и нечетных чисел\n");
 
         int startNum = -10;
-        int evenSum = 0;
-        int unevenSum = 0;
+        int sumEven = 0;
+        int sumOdd = 0;
         int count = startNum;
         do {
             if (count % 2 == 0) {
-                evenSum += count;
+                sumEven += count;
             } else {
-                unevenSum += count;
+                sumOdd += count;
             }
             count++;
         } while (count <= 21);
         System.out.println("В отрезке [" + startNum + ", " + --count + "]" +
-                " сумма четных чисел = " + evenSum + ",  а нечетных = " + unevenSum);
+                " сумма четных чисел = " + sumEven + ",  а нечетных = " + sumOdd);
 
         System.out.println("\n2.Вывод чисел в порядке убывания\n");
 
-        int num = 10;
-        int num1 = 5;
-        int num2 = -1;
-        int maxNum = 0;
-        if (num > num1 && num > num2) {
-            maxNum = num;
-        } else if (num1 > num && num1 > num2) {
-            maxNum = num1;
-        } else if (num2 > num && num2 > num1) {
-            maxNum = num2;
+        int a = -1;
+        int b = 5;
+        int c = 10;
+        int max = a;
+        if (b > max) {
+            max = b;
         }
-        int minNum = 0;
-        if (num < num1 && num < num2) {
-            minNum = num;
-        } else if (num1 < num && num1 < num2) {
-            minNum = num1;
-        } else if (num2 < num1 && num2 < num) {
-            minNum = num2;
+        if (c > max) {
+            max = c;
         }
-        for (int i = maxNum - 1; i > minNum; i--) {
-            System.out.print(i + " ");
+        int min = a;
+        if (b < min) {
+            min = b;
         }
-
+        if (c < min) {
+            min = c;
+        }
+        for (int i = max - 1; i > min; i--) {
+             System.out.print(i + " ");
+        }
 
         System.out.println("\n\n3.Вывод реверсивного числа и суммы его цифр\n");
 
-        num = 1234;
-        int reversNum = 0;
+        int num = 1234;
         int sum = 0;
-        while (num != 0) {
+        System.out.print("Исходное число в обратном порядке = ");
+        while (num > 0) {
             sum += num % 10;
-            reversNum = reversNum * 10 + num % 10;
+            System.out.print(num % 10);
             num /= 10;
         }
-        System.out.println("Исходное число в обратном порядке = " + reversNum +
-                "\nСумма цифр исходного числа = " + sum);
-
+        System.out.println("\nСумма цифр исходного числа = " + sum);
 
         System.out.println("\n4.Вывод чисел в несколько строк\n");
 
         count = 0;
-        for (int  i = 1; i < 24; i++) {
-            if (i % 2 == 1) {
-                System.out.printf("%2d ",i);
-                count++;
-            }
+        for (int  i = 1; i < 24; i+=2) {
+            System.out.printf("%2d ", i);
+            count++;
             if (count % 5 == 0) {
-                System.out.println();
+            System.out.println();
             }
         }
         if (count % 5 != 0) {
             while (count % 5 != 0) {
-                System.out.printf("%2d ",0);
+                System.out.printf("%2d ", 0);
                 count++;
             }
         }
-
 
         System.out.println("\n\n5.Проверка количества двоек числа на четность/нечетность\n");
 
         num = 3242592;
         int countTwos = 0;
-        count = num;
-        int temp = 0;
-        while (count != 0) {
-            temp = count % 10;
-            if (temp == 2) {
+        int numCopy = num;
+        while (numCopy > 0) {
+            if (numCopy % 10 == 2) {
                 countTwos++;
             }
-            count /= 10;
+            numCopy /= 10;
         }
-        String parity = "";
+        String parity = " нечетное";
         if (countTwos % 2 == 0) {
             parity = " четное";
-        } else {
-            parity = " нечетное";
         }
         System.out.println("В " + num + parity + " количество двоек - " + countTwos);
 
@@ -151,13 +139,12 @@ public class CyclesTheme {
         System.out.println("\n8.Проверка, является ли число палиндромом\n");
 
         num = 1234321;
-        reversNum = 0;
+        int reversNum = 0;
         count = num;
         while (count != 0) {
             reversNum = reversNum * 10 + count % 10;
             count /= 10;
         }
-
         System.out.println("Число " + num + ((num == reversNum) ?
                 " является" : " не является") + " палиндромом");
 
@@ -187,7 +174,6 @@ public class CyclesTheme {
                     continue;
                 }
                 System.out.printf("%2d ",i * j);
-
             }
             System.out.println();
         }
