@@ -55,11 +55,11 @@ public class CyclesTheme {
         System.out.println("\n4.Вывод чисел в несколько строк\n");
 
         count = 0;
-        for (int  i = 1; i < 24; i+=2) {
+        for (int  i = 1; i < 24; i += 2) {
             System.out.printf("%2d ", i);
             count++;
             if (count % 5 == 0) {
-            System.out.println();
+                System.out.println();
             }
         }
         if (count % 5 != 0) {
@@ -94,22 +94,24 @@ public class CyclesTheme {
             }
             System.out.println();
         }
+        System.out.println();
 
         int countStrings = 5;
         while (countStrings > 0) {
             int countSymbols = 1;
             while (countSymbols <= countStrings) {
-            System.out.print("#");
-            countSymbols++;
+                System.out.print("#");
+                countSymbols++;
             }
-        System.out.println();
-        countStrings--;
+            System.out.println();
+            countStrings--;
         }
+        System.out.println();
 
         countStrings = 1;
         int heightTriangle = 3;
         int weightString = 1;
-        int increment = 1;
+        int weightChange = 1;
         do {
             int countSymbols = 0;
             do {
@@ -117,9 +119,9 @@ public class CyclesTheme {
             } while (++countSymbols < weightString);
             System.out.println();
             if (weightString == heightTriangle) {
-                increment = -1;
+                weightChange = -1;
             }
-            weightString += increment;
+            weightString += weightChange;
         } while (++countStrings <= 5);
 
         System.out.println("\n7.Отображение ASCII-символов\n");
@@ -127,35 +129,45 @@ public class CyclesTheme {
         System.out.printf("%-10s%-12s%-11s%n","DECIMAL","CHARACTER","DESCRIPTION");
         for (int i = 15; i < 123; i++) {
             if (i % 2 == 1 && i < 48) {
-                System.out.printf("%2s%-12d%-13c%-50s%n"," ",i,(char) i,
-                        Character.getName((char) i));
+                System.out.printf("%2s%-12d%-13c%-50s%n"," ",i, i,
+                        Character.getName(i));
             }
             if (i % 2 == 0 && i > 96 && i < 123) {
-                System.out.printf("%2s%-12d%-13c%-50s%n"," ",i,(char) i,
-                        Character.getName((char) i));
+                System.out.printf("%2s%-12d%-13c%-50s%n"," ",i,i,
+                        Character.getName(i));
             }
         }
 
         System.out.println("\n8.Проверка, является ли число палиндромом\n");
 
         num = 1234321;
-        int reversNum = 0;
-        count = num;
-        while (count != 0) {
-            reversNum = reversNum * 10 + count % 10;
-            count /= 10;
+        int resultNum = 0;
+        numCopy = num;
+        while (numCopy > 0) {
+            resultNum = resultNum * 10 + numCopy % 10;
+            numCopy /= 10;
         }
-        System.out.println("Число " + num + ((num == reversNum) ?
+        System.out.println("Число " + num + ((num == resultNum) ?
                 " является" : " не является") + " палиндромом");
 
         System.out.println("\n9.Проверка, является ли число счастливым\n");
 
         num = 914851;
-        startNum = num / 1000;
-        int endNum = num % 1000;
-        int startSum = startNum / 100 + startNum % 100 / 10 + startNum % 10;
-        int endSum = endNum / 100 + endNum % 100 / 10 + endNum % 10;
-        System.out.println("Число " + num + ((startSum == endSum) ?
+        numCopy = num;
+        int startSum = 0;
+        int endSum = 0;
+        while (num > 0) {
+            if (num / 1000 > 0) {
+                endSum += num % 10;
+                num /= 10;
+            } else {
+                startSum += num % 10;
+                num /= 10;
+            }
+        }
+        startNum = numCopy / 1000;
+        int endNum = numCopy % 1000;
+        System.out.println("Число " + numCopy + ((startSum == endSum) ?
                 " является" : " не является") + " счастливым\n" + "Сумма цифр " +
                 startNum + " = " + startSum + ", а сумма " + endNum + " = " + endSum);
 

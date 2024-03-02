@@ -3,20 +3,20 @@ public class IfElseStatementTheme {
         System.out.println("\n1.Перевод псевдокода на язык Java\n");
 
         boolean isMale = true;
-        int age = 21;
-        float height = 1.83f;
         if (!isMale) {
             System.out.println("Женский пол");
         } else {
             System.out.println("Мужской пол");
         }
 
+        int age = 21;
         if (age > 18) {
             System.out.println("Вы совершеннолетний!");
         } else {
             System.out.println("Вы не являетесь совершеннолетним!");
         }
 
+        float height = 1.83f;
         if (height < 1.8) {
             System.out.println("Этот мир слишком большой для Вас!");
         } else {
@@ -135,16 +135,17 @@ public class IfElseStatementTheme {
         } else if (historyPercent > 60) {
             historyGrade = 3;
         }
-        int programmingProcent = 92;
+        
+        int programmingPercent = 92;
         int programmingGrade = 2;
-        if (programmingProcent > 91) {
+        if (programmingPercent > 91) {
             programmingGrade = 5;
-        } else if (programmingProcent > 73) {
+        } else if (programmingPercent > 73) {
             programmingGrade = 4;
-        } else if (programmingProcent > 60) {
+        } else if (programmingPercent > 60) {
             programmingGrade = 3;
         }
-        float averagePercent = (historyPercent + programmingProcent) / 2f;
+        float averagePercent = (historyPercent + programmingPercent) / 2f;
         float averageGrade = (historyGrade + programmingGrade) / 2f;
         System.out.println("Оценка по истории: " + historyGrade +
                 "\nОценка по программированию: " + programmingGrade +
