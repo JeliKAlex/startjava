@@ -5,16 +5,18 @@ public class RpsGameFormatting{
         String rock = "R";
         String scissors = "S";
         String paper = "P";
+
         //ход первого игрока
         String name1 = "HEL";
         Random r = new Random();
-        int position1 = r.nextInt(1,100);
+        int position1 = r.nextInt(1, 100);
         String sign1 = rock;
         if (position1 > 66) {
             sign1 = paper;
         } else if (position1 > 33) {
             sign1 = scissors;
         }
+
         System.out.println("\nХод " + name1 + ": ");
         for (int i = 0; i < 5; i++) {
             System.out.print(rock + "\r");
@@ -25,15 +27,17 @@ public class RpsGameFormatting{
             Thread.sleep(100);
         }
         System.out.println(sign1);
+
         //ход второго игрока
         String name2 = "WALLE";
-        int position2 = r.nextInt (1,100);
+        int position2 = r.nextInt (1, 100);
         String sign2 = rock;
         if (position2 > 66) {
             sign2 = paper;
         } else if (position1 > 33) {
             sign2 = scissors;
         }
+
         System.out.println("\nХод " + name2 + ": ");
         for (int i = 0; i < 5; i++) {
             System.out.print(rock + "\r");
@@ -49,6 +53,7 @@ public class RpsGameFormatting{
             System.out.println("\nПобедила дружба!");
             return;
         }
+
         boolean isName1Equal = sign1.equals(rock) && sign2.equals(scissors) || sign1.equals(scissors) &&
                 sign2.equals(paper) || sign1.equals(paper) && sign2.equals(rock);
         if (isName1Equal) {
