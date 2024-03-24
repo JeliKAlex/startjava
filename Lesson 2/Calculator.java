@@ -1,15 +1,15 @@
 public class Calculator {
 
-    private int firstNum;
-    private int secondNum;
+    private int a;
+    private int b;
     private char operation;
 
-    public void setFirstNum(int firstNum) {
-        this.firstNum = firstNum;
+    public void setA(int a) {
+        this.a = a;
     }
 
-    public void setSecondNum(int secondNum) {
-        this.secondNum = secondNum;
+    public void setB(int b) {
+        this.b = b;
     }
 
     public void setOperation(char operation) {
@@ -18,26 +18,25 @@ public class Calculator {
 
     public int calculate() {
         switch (operation) {
-            case '+' :
-                return firstNum + secondNum;
-            case '-' :
-                return firstNum - secondNum;
-            case '*' :
-                return firstNum * secondNum;
-            case '/' :
-                return firstNum / secondNum;
-            case '%' :
-                return firstNum % secondNum;
-            case '^' :
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                return a / b;
+            case '%':
+                return a % b;
+            case '^':
                 int result = 1;
-                for (int i = 0; i < secondNum; i++) {
-                    result *= firstNum;
+                for (int i = 0; i < b; i++) {
+                    result *= a;
                 }
                 return result;
-            default :
-                System.out.println("\nДанная математическая операция не поддерживается!\n" + 
-                        "По умолчанию выполняется сложение");
-                return firstNum + secondNum;
+            default:
+                System.out.println("\nДанная математическая операция не поддерживается!\n");
+                return 0;
         }
     }
 }

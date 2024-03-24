@@ -8,11 +8,11 @@ public class CalculatorTest {
 
         do {
             System.out.print("\nВведите первое число: ");
-            calculatorOne.setFirstNum(scan.nextInt());
+            calculatorOne.setA(scan.nextInt());
             System.out.print("Введите знак математической операции: ");
             calculatorOne.setOperation(scan.next().charAt(0));
             System.out.print("Введите второе число: ");
-            calculatorOne.setSecondNum(scan.nextInt());
+            calculatorOne.setB(scan.nextInt());
 
             System.out.println("Ответ: " + calculatorOne.calculate());
 
