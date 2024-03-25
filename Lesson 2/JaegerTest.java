@@ -1,7 +1,6 @@
 public class JaegerTest {
     public static void main(String[] args){
         Jaeger jaegerOne = new Jaeger();
-        Jaeger jaegerTwo = new Jaeger("Crimson Typhoon", "Mark-4", "USA", 80.3f, 3.4f, 6, 7);
 
         jaegerOne.setModelName("Bracer Phoenix");
         jaegerOne.setMark("Mark4-5555");
@@ -19,7 +18,7 @@ public class JaegerTest {
         jaegerOne.setMark("Mark-5");
         jaegerOne.getInfo();
 
-
+        Jaeger jaegerTwo = new Jaeger("Crimson Typhoon", "Mark-4", "USA", 80.3f, 3.4f, 6, 7);
         jaegerTwo.useVortexCannon();
         jaegerTwo.move();
         jaegerTwo.getInfo();

@@ -8,6 +8,19 @@ public class Jaeger {
     private int strength;
     private int armor;
 
+    public Jaeger() {}
+
+    public Jaeger(String modelName, String mark, String origin, float height,
+            float weight, int strength, int armor) {
+        this.modelName = modelName;
+        this.mark = mark;
+        this.origin = origin;
+        this.height = height;
+        this.weight = weight;
+        this.strength = strength;
+        this.armor = armor;
+    }
+
     public String getModelName() {
         return modelName;
     }
@@ -64,24 +77,10 @@ public class Jaeger {
         this.armor = armor;
     }
 
-    public Jaeger() {
-
-    }
-
-    public Jaeger(String modelName, String mark, String origin, float height, float weight,
-            int strength, int armor) {
-        this.modelName = modelName;
-        this.mark = mark;
-        this.origin = origin;
-        this.height = height;
-        this.weight = weight;
-        this.strength = strength;
-        this.armor = armor;
-    }
-
-    public void getInfo(){
-        System.out.println("\nModel Name: " + modelName + "\nMark: " + mark + "\nOrigin: " + origin +
-                "\nHeight: " + height + "\nWeight: " + weight + "\nStrength: " + strength +
+    public void getInfo() {
+        System.out.println("\nModel Name: " + modelName + "\nMark: " + mark + 
+                "\nOrigin: " + origin + "\nHeight: " + height +
+                "\nWeight: " + weight + "\nStrength: " + strength +
                 "\nArmor: " + armor);
     }
 
