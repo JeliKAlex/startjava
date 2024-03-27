@@ -5,58 +5,51 @@ public class GuessNumber {
 
     private Player player1;
     private Player player2;
-    private int computerNum;
+    private int targetNum;
     private Random random = new Random();
     private Scanner scan = new Scanner(System.in);
+    private boolean isСontinue;
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
-    public void startGame() {
-        computerNum = random.nextInt(100) + 1;
+    public void start() {
+        targetNum = random.nextInt(100) + 1;
+        isСontinue = true;
 
-        System.out.println(computerNum);
+        System.out.println(targetNum);
 
         do {
-            do {
-                enterNum(player1);
-            } while (!checkInterval(player1.getNum()));
-            compareNum(player1);
+            enterNum(player1);
+            isСontinue = isGuessed(player1);
 
-            if (player1.getNum() != computerNum) {
-                do {
-                    enterNum(player2);
-                } while (!checkInterval(player2.getNum()));
-                compareNum(player2);
+            if (isСontinue) {
+                enterNum(player2);
+                isСontinue = isGuessed(player2);
             }
-        } while (computerNum != player1.getNum() && computerNum != player2.getNum());
+        } while (isСontinue);
     }
 
-    private boolean checkInterval(int num) {
-        if (num > 0 && num <= 100) {
-            return true;
-        } else {
-            System.out.println("Введи число из полуинтервала (0, 100]");
+    private void enterNum(Player player) {
+        do {
+            System.out.print(player.getName() + ", введи число из полуинтервала (0, 100]: ");
+            player.setNum(scan.nextInt());
+        } while (player.getNum() <= 0 || player.getNum() > 100);
+    }
+
+    private boolean isGuessed(Player player) {
+        if (player.getNum() == targetNum) {
+            System.out.println(player.getName() + " отгадал загаданное число: " + targetNum);
             return false;
-        }
-    }
-
-    private void compareNum(Player player) {
-        if (player.getNum() == computerNum) {
-            System.out.println(player.getName() + " отгадал загаданное число: " + computerNum);
         } else {
-            if (player.getNum() > computerNum) {
+            if (player.getNum() > targetNum) {
                 System.out.println("Число " + player.getNum() + " больше того, что загадал компьютер");
             } else {
                 System.out.println("Число " + player.getNum() + " меньше того, что загадал компьютер");
             }
         }
-    }
-
-    private void enterNum(Player player) {
-        System.out.print(player.getName() + ", отгадывай число: ");
-        player.setNum(scan.nextInt());
+        return true;
     }
 }
