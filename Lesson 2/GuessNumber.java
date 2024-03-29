@@ -8,7 +8,6 @@ public class GuessNumber {
     private int targetNum;
     private Random random = new Random();
     private Scanner scan = new Scanner(System.in);
-    private boolean isСontinue;
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
@@ -17,19 +16,20 @@ public class GuessNumber {
 
     public void start() {
         targetNum = random.nextInt(100) + 1;
-        isСontinue = true;
 
         System.out.println(targetNum);
 
         do {
             enterNum(player1);
-            isСontinue = isGuessed(player1);
-
-            if (isСontinue) {
-                enterNum(player2);
-                isСontinue = isGuessed(player2);
+            if (isGuessed(player1)) {
+                return;
             }
-        } while (isСontinue);
+
+            enterNum(player2);
+            if (isGuessed(player2)) {
+                return;
+            }
+        } while (player1.getNum() != targetNum || player2.getNum() != targetNum);
     }
 
     private void enterNum(Player player) {
@@ -40,16 +40,16 @@ public class GuessNumber {
     }
 
     private boolean isGuessed(Player player) {
-        if (player.getNum() == targetNum) {
+        int playerNum = player.getNum();
+        if (playerNum == targetNum) {
             System.out.println(player.getName() + " отгадал загаданное число: " + targetNum);
-            return false;
-        } else {
-            if (player.getNum() > targetNum) {
-                System.out.println("Число " + player.getNum() + " больше того, что загадал компьютер");
-            } else {
-                System.out.println("Число " + player.getNum() + " меньше того, что загадал компьютер");
-            }
+            return true;
         }
-        return true;
+        if (playerNum > targetNum) {
+            System.out.println("Число " + playerNum + " больше того, что загадал компьютер");
+        } else {
+            System.out.println("Число " + playerNum + " меньше того, что загадал компьютер");
+        }
+        return false;
     }
 }
