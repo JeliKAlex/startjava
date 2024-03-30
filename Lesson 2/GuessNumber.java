@@ -26,10 +26,7 @@ public class GuessNumber {
             }
 
             enterNum(player2);
-            if (isGuessed(player2)) {
-                return;
-            }
-        } while (player1.getNum() != targetNum || player2.getNum() != targetNum);
+        } while (!isGuessed(player2));
     }
 
     private void enterNum(Player player) {
