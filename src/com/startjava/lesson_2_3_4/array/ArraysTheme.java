@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class ArraysTheme {
     public static void main(String[] args) throws InterruptedException {
-        //ReverseArray();
-        //CalculateFactorial();
-        //DeleteElement();
-        //OutputLadder();
-        //FillRandomNumbs();
+        ReverseArray();
+        CalculateFactorial();
+        DeleteElement();
+        OutputLadder();
+        FillRandomNumbs();
         StartGameGallows();
-        //OutputTypeWriter();
+        OutputTypeWriter();
     }
 
     private static void ReverseArray() {
