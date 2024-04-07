@@ -1,8 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
-
 
 public class ArraysTheme {
     public static void main(String[] args) throws InterruptedException {
@@ -37,7 +35,7 @@ public class ArraysTheme {
     }
 
     private static void CalculateFactorial() {
-        System.out.println("\n2. Вычисление факториала\n");
+        System.out.println("\n\n2. Вычисление факториала\n");
 
         int[] numbers = new int[10];
         int factorial = 1;
@@ -55,7 +53,7 @@ public class ArraysTheme {
     }
 
     private static void DeleteElement() {
-        System.out.println("\n3. Удаление элемента массива\n");
+        System.out.println("\n\n3. Удаление элемента массива\n");
 
         float[] numbers = new float[15];
         for (int i = 0; i < numbers.length; i++) {
@@ -111,6 +109,7 @@ public class ArraysTheme {
     }
 
     private static void FillRandomNumbs() {
+        System.out.println("\n5. Заполнение массива уникальными числами\n");
         int[] numbers = new int[30];
 
         for (int i = 0; i < numbers.length; i++) {
@@ -143,7 +142,7 @@ public class ArraysTheme {
     }
 
     private static void StartGameGallows() {
-        System.out.println("\n6. Игра \"Виселица\"\n");
+        System.out.println("\n\n6. Игра \"Виселица\"\n");
 
         String[] gallows = new String[6];
         gallows[5] = """
@@ -220,13 +219,15 @@ public class ArraysTheme {
 
             if (!isGuessedLetter && !fallLetters.toString().contains(String.valueOf(inputLetter))) {
                 countTry--;
-                fallLetters.append(inputLetter + " ");
+                fallLetters.append(inputLetter).append(" ");
             }
 
-            if (hiddenWord.equals(maskWord.toString())) {
+            if (hiddenWord.contentEquals(maskWord)) {
                 System.out.println("\nТы отгдал слово: " + maskWord);
                 System.out.println("Осталось попыток: " + countTry);
-                System.out.println(gallows[gallows.length - 1 - countTry]);
+                if (countTry < 5) {
+                    System.out.println(gallows[gallows.length - 1 - countTry]);
+                }
                 return;
             }
             if (countTry == 0) {
@@ -234,10 +235,11 @@ public class ArraysTheme {
                 System.out.println(gallows[gallows.length - 1]);
                 return;
             }
-        } while (!hiddenWord.equals(maskWord));
+        } while (!hiddenWord.contentEquals(maskWord));
     }
 
     private static void OutputTypeWriter() throws InterruptedException {
+        System.out.println("\n7. Вывод текста с эффектом пишущей машинки\n");
         String text1 = "Java -- это C++, из которого убрали все пистолеты, ножи и дубинки. \n" +
                 "-- James Gosling";
         String text2 = "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его. \n" +
@@ -273,9 +275,9 @@ public class ArraysTheme {
             }
         }
 
-        for (int i = 0; i < wordsCopy.length; i++) {
-            for (int j = 0; j < wordsCopy[i].length(); j++) {
-                System.out.print(wordsCopy[i].charAt(j));
+        for (String s : wordsCopy) {
+            for (int j = 0; j < s.length(); j++) {
+                System.out.print(s.charAt(j));
                 Thread.sleep(200);
             }
             System.out.print(" ");
