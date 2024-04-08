@@ -4,103 +4,104 @@ import java.util.Scanner;
 
 public class ArraysTheme {
     public static void main(String[] args) throws InterruptedException {
-        ReverseArray();
-        CalculateFactorial();
-        DeleteElement();
-        OutputLadder();
-        FillRandomNumbs();
-        StartGameGallows();
-        OutputTypeWriter();
+        reverseArray();
+        calculateFactorial();
+        deleteElement();
+        outputLadder();
+        fillRandomNumbs();
+        startGameGallows();
+        outputTypeWriter();
     }
 
-    private static void ReverseArray() {
+    private static void reverseArray() {
         System.out.println("1. Реверс значений массива\n");
 
-        int[] numbers = {1, 7, 4, 5, 2, 6, 3};
+        int[] reversNumbs = {1, 7, 4, 5, 2, 6, 3};
         System.out.print("   До реверса: [");
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.print(numbers[i] + (i == numbers.length - 1 ? "]" : ", "));
-        }
+        outputTask1Array(reversNumbs);
 
-        for (int i = 0; i < numbers.length / 2; i++) {
-            int temp = numbers[i];
-            numbers[i] = numbers[numbers.length - 1 - i];
-            numbers[numbers.length - 1 - i] = temp;
+        for (int i = 0; i < reversNumbs.length / 2; i++) {
+            int temp = reversNumbs[i];
+            reversNumbs[i] = reversNumbs[reversNumbs.length - 1 - i];
+            reversNumbs[reversNumbs.length - 1 - i] = temp;
         }
 
         System.out.print("\nПосле реверса: [");
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.print(numbers[i] + (i == numbers.length - 1 ? "]" : ", "));
+        outputTask1Array(reversNumbs);
+    }
+
+    private static void outputTask1Array(int[] reversNumbs) {
+        for (int i = 0; i < reversNumbs.length; i++) {
+            System.out.print(reversNumbs[i] + (i == reversNumbs.length - 1 ? "]" : ", "));
         }
     }
 
-    private static void CalculateFactorial() {
+    private static void calculateFactorial() {
         System.out.println("\n\n2. Вычисление факториала\n");
 
-        int[] numbers = new int[10];
+        int len = 10;
+        int[] factorialNumbs = new int[len];
         int factorial = 1;
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = i;
-            if (i > 0 && i < 9) {
-                factorial *= numbers[i];
-            }
+        for (int i = 0; i < len; i++) {
+            factorialNumbs[i] = i;
         }
 
-        for (int i = 1; i < numbers.length - 1; i++) {
-            System.out.print(numbers[i] + (i == numbers.length - 2 ? " = " : " * "));
+        for (int i = 1; i < len - 1; i++) {
+            factorial *= factorialNumbs[i];
+            System.out.print(factorialNumbs[i] + (i == len - 2 ? " = " : " * "));
         }
         System.out.print(factorial);
     }
 
-    private static void DeleteElement() {
+    private static void deleteElement() {
         System.out.println("\n\n3. Удаление элемента массива\n");
 
-        float[] numbers = new float[15];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = (float) Math.random();
+        int len = 15;
+        float[] changeNumbs = new float[len];
+        for (int i = 0; i < len; i++) {
+            changeNumbs[i] = (float) Math.random();
         }
 
-        System.out.print("  Исходный массив: [");
-        for (int i = 0; i < numbers.length; i++) {
-            if (i == 8) {
-                System.out.println();
-            }
-            System.out.printf("%6.3f%s", numbers[i], (i == numbers.length - 1 ? "]" : ", "));
-        }
+        System.out.println("Исходный массив:");
+        outputTask3Array(changeNumbs);
 
-        float num = numbers[numbers.length / 2];
+        float averageNumb = changeNumbs[len / 2];
         int count = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] > num) {
-                numbers[i] = 0;
+        for (int i = 0; i < len; i++) {
+            if (changeNumbs[i] > averageNumb) {
+                changeNumbs[i] = 0;
                 count++;
             }
         }
 
-        System.out.print("\nИзмененный массив: [");
-        for (int i = 0; i < numbers.length; i++) {
-            if (i == 8) {
-                System.out.println();
-            }
-            System.out.printf("%6.3f%s", numbers[i], (i == numbers.length - 1 ? "]" : ", "));
-        }
+        System.out.println("\nИзмененный массив:");
+        outputTask3Array(changeNumbs);
         System.out.println("\nКоличество обнуленных ячеек: " + count);
     }
 
-    private static void OutputLadder() {
+    private static void outputTask3Array(float[] changeNumbs) {
+        for (int i = 0; i < changeNumbs.length; i++) {
+            if (i == 8) {
+                System.out.println();
+            }
+            System.out.printf("%6.3f ", changeNumbs[i]);
+        }
+    }
+
+    private static void outputLadder() {
         System.out.println("\n4. Вывод алфавита лесенкой\n");
 
-        char[] alphabet = new char[26];
-        char ch = 'A';
-        for (int i = 0; i < alphabet.length; i++) {
-            alphabet[i] = ch++;
+        int len = 26;
+        char[] alphabet = new char[len];
+        for (int i = 0; i < len; i++) {
+            alphabet[i] = (char) ('A' + i);
         }
 
-        int countStrings = alphabet.length;
+        int countStrings = len;
         int coutSimbols = 1;
         while (countStrings > 0) {
             for (int i = 0; i < coutSimbols; i++) {
-                System.out.print(alphabet[alphabet.length - 1 - i]);
+                System.out.print(alphabet[len - 1 - i]);
             }
             System.out.println();
             countStrings--;
@@ -108,40 +109,48 @@ public class ArraysTheme {
         }
     }
 
-    private static void FillRandomNumbs() {
+    private static void fillRandomNumbs() {
         System.out.println("\n5. Заполнение массива уникальными числами\n");
-        int[] numbers = new int[30];
 
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = (int) (Math.random() * 40 + 60);
+        int len = 30;
+        int[] randomNumbs = new int[len];
+
+        for (int i = 0; i < len; i++) {
+            int randomNumb = (int) (Math.random() * 40 + 60);
+            boolean isUnique = true;
             for (int j = 0; j < i; j++) {
-                while (numbers[i] == numbers[j]) {
-                    numbers[i] = (int) (Math.random() * 40 + 60);
-                    j = 0;
+                if (randomNumbs[j] == randomNumb) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                randomNumbs[i] = randomNumb;
+            } else {
+                i--;
+            }
+        }
+
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (randomNumbs[i] > randomNumbs[j]) {
+                    int temp = randomNumbs[i];
+                    randomNumbs[i] = randomNumbs[j];
+                    randomNumbs[j] = temp;
                 }
             }
         }
 
-        for (int i = 0; i < numbers.length - 1; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-                if (numbers[i] > numbers[j]) {
-                    int temp = numbers[i];
-                    numbers[i] = numbers[j];
-                    numbers[j] = temp;
-                }
-            }
-        }
-
-        System.out.print("Полученный массив: \n[");
-        for (int i = 0; i < numbers.length; i++) {
+        System.out.print("Полученный массив:\n");
+        for (int i = 0; i < len; i++) {
             if (i % 10 == 0 && i != 0) {
                 System.out.println();
             }
-            System.out.printf("%d%s", numbers[i], (i == numbers.length - 1 ? "]" : ", "));
+            System.out.printf("%3d", randomNumbs[i]);
         }
     }
 
-    private static void StartGameGallows() {
+    private static void startGameGallows() {
         System.out.println("\n\n6. Игра \"Виселица\"\n");
 
         String[] gallows = new String[6];
@@ -238,7 +247,7 @@ public class ArraysTheme {
         } while (!hiddenWord.contentEquals(maskWord));
     }
 
-    private static void OutputTypeWriter() throws InterruptedException {
+    private static void outputTypeWriter() throws InterruptedException {
         System.out.println("\n7. Вывод текста с эффектом пишущей машинки\n");
         String text1 = "Java -- это C++, из которого убрали все пистолеты, ножи и дубинки. \n" +
                 "-- James Gosling";
