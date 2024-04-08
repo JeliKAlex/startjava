@@ -197,7 +197,7 @@ public class ArraysTheme {
                 
                 """;
         String[] hiddenWords = {"СЛОВО", "КОШКА", "МАШИНА", "МОЛОКО", "КОМПЬЮТЕР"};
-        String hiddenWord = hiddenWords[(int) (Math.random()*hiddenWords.length)];
+        String hiddenWord = hiddenWords[(int) (Math.random() * hiddenWords.length)];
         StringBuilder maskWord = new StringBuilder();
         maskWord.append("_".repeat(hiddenWord.length()));
         int countTry = 5;
@@ -261,10 +261,10 @@ public class ArraysTheme {
         int indexEnd = 0;
         
         for (int i = 0; i < words.length; i++) {
-            if(words[i].length() > wordBigLength && !words[i].equals("--")) {
+            if (words[i].length() > wordBigLength && !words[i].equals("--")) {
                 wordBigLength = words[i].length();
                 indexEnd = i;
-            } else if (words[i].length() < wordSmallLength &&  !words[i].equals("--")) {
+            } else if (words[i].length() < wordSmallLength && !words[i].equals("--")) {
                 wordSmallLength = words[i].length();
                 indexStart = i;
             }
@@ -291,6 +291,5 @@ public class ArraysTheme {
             }
             System.out.print(" ");
         }
-        
     }
 }
