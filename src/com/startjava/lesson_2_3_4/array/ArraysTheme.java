@@ -19,7 +19,7 @@ public class ArraysTheme {
         int[] reversedNumbs = {1, 7, 4, 5, 2, 6, 3};
         int len = reversedNumbs.length;
         System.out.print("   До реверса: [");
-        printTask1(reversedNumbs, len);
+        print(reversedNumbs, len);
 
         for (int i = 0; i < len / 2; i++) {
             int temp = reversedNumbs[i];
@@ -28,12 +28,27 @@ public class ArraysTheme {
         }
 
         System.out.print("\nПосле реверса: [");
-        printTask1(reversedNumbs, len);
+        print(reversedNumbs, len);
     }
 
-    private static void printTask1(int[] reversedNumbs, int len) {
+    private static void print(int[] reversedNumbs, int len) {
         for (int i = 0; i < len; i++) {
             System.out.print(reversedNumbs[i] + (i == len - 1 ? "]" : ", "));
+        }
+    }
+
+    private static void print(float[] randomNumbs, int len) {
+        for (int i = 0; i < len; i++) {
+            if (i == 8) {
+                System.out.println();
+            }
+            System.out.printf("%6.3f ", randomNumbs[i]);
+        }
+    }
+
+    private static void print(String[] gallows, int countTry) {
+        for (int i = 1; i < gallows.length - countTry; i++) {
+            System.out.println(gallows[i]);
         }
     }
 
@@ -64,7 +79,7 @@ public class ArraysTheme {
         }
 
         System.out.println("Исходный массив:");
-        printTask3(randomNumbs, len);
+        print(randomNumbs, len);
 
         float averageNumb = randomNumbs[len / 2];
         int count = 0;
@@ -76,17 +91,8 @@ public class ArraysTheme {
         }
 
         System.out.println("\nИзмененный массив:");
-        printTask3(randomNumbs, len);
+        print(randomNumbs, len);
         System.out.println("\nКоличество обнуленных ячеек: " + count);
-    }
-
-    private static void printTask3(float[] randomNumbs, int len) {
-        for (int i = 0; i < len; i++) {
-            if (i == 8) {
-                System.out.println();
-            }
-            System.out.printf("%6.3f ", randomNumbs[i]);
-        }
     }
 
     private static void outputLadder() {
@@ -154,47 +160,17 @@ public class ArraysTheme {
         System.out.println("\n\n6. Игра \"Виселица\"\n");
 
         String[] gallows = {"",
-                """
-                
-                |
-                |
-                |
-                |
-                """,
-                """
-                |--
-                |
-                |
-                |
-                |
-                """,
-                """
-                |----|
-                |
-                |
-                |
-                |
-                """,
-                """
-                |----|
-                |    O
-                |   /|\\
-                |
-                |
-                """,
-                """
-                |----|
-                |    O
-                |   /|\\
-                |   / \\
-                |
-                """};
+                "-------",
+                "|     |",
+                "|     O",
+                "|    /|\\",
+                "|    / \\"
+        };
         int lenGallows = gallows.length;
         String[] guessedWords = {"СЛОВО", "КОШКА", "МАШИНА", "МОЛОКО", "КОМПЬЮТЕР"};
         int lenWords = guessedWords.length;
         String guessedWord = guessedWords[(int) (Math.random() * lenWords)];
-        StringBuilder maskWord = new StringBuilder();
-        maskWord.append("_".repeat(guessedWord.length()));
+        StringBuilder maskWord = new StringBuilder("_".repeat(guessedWord.length()));
         int countTry = lenGallows - 1;
         Scanner scan = new Scanner(System.in);
         char inputLetter;
@@ -205,7 +181,7 @@ public class ArraysTheme {
             do {
                 isGuessedLetter = false;
                 if ((lenGallows - 1 - countTry) > 0) {
-                    System.out.println(gallows[lenGallows - 1 - countTry]);
+                    print(gallows, countTry);
                 }
                 System.out.println(maskWord);
                 System.out.println("Ошибочные буквы: " + fallLetters);
@@ -218,7 +194,7 @@ public class ArraysTheme {
                 if (inputLetter == guessedWord.charAt(i)) {
                     if (maskWord.charAt(i) != inputLetter) {
                         maskWord.setCharAt(i, inputLetter);
-                        boolean hasAddTry = countTry < 5 &&
+                        boolean hasAddTry = countTry < lenGallows - 1 &&
                                 maskWord.indexOf(String.valueOf(inputLetter)) == i;
                         if (hasAddTry) {
                             countTry++;
@@ -245,7 +221,7 @@ public class ArraysTheme {
             }
             if (countTry == 0) {
                 System.out.println("\nТы не отгадал слово: " + guessedWord);
-                System.out.println(gallows[lenGallows - 1]);
+                print(gallows, countTry);
                 return;
             }
         } while (!guessedWord.contentEquals(maskWord));
