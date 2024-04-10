@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-
     private int a;
     private int b;
     private char operation;
@@ -18,7 +17,7 @@ public class Calculator {
         this.operation = operation;
     }
 
-    public int calculate() {
+    public double calculate() {
         switch (operation) {
             case '+':
                 return a + b;
@@ -27,18 +26,14 @@ public class Calculator {
             case '*':
                 return a * b;
             case '/':
-                return a / b;
+                return (double) a / b;
             case '%':
                 return a % b;
             case '^':
-                int result = 1;
-                for (int i = 0; i < b; i++) {
-                    result *= a;
-                }
-                return result;
+                return Math.pow(a, b);
             default:
-                System.out.println("\nДанная математическая операция не поддерживается!\n");
-                return 0;
+                System.out.println("\nОшибка: знак " + operation + " не поддерживается\n");
+                return Double.NaN;
         }
     }
 }
