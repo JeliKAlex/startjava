@@ -23,33 +23,12 @@ public class ArraysTheme {
 
         for (int i = 0; i < len / 2; i++) {
             int temp = reversedNumbs[i];
-            reversedNumbs[i] = reversedNumbs[len - 1 - i];
-            reversedNumbs[len - 1 - i] = temp;
+            reversedNumbs[i] = reversedNumbs[--len];
+            reversedNumbs[len] = temp;
         }
 
         System.out.print("\nПосле реверса: [");
         print(reversedNumbs, len);
-    }
-
-    private static void print(int[] reversedNumbs, int len) {
-        for (int i = 0; i < len; i++) {
-            System.out.print(reversedNumbs[i] + (i == len - 1 ? "]" : ", "));
-        }
-    }
-
-    private static void print(float[] randomNumbs, int len) {
-        for (int i = 0; i < len; i++) {
-            if (i == 8) {
-                System.out.println();
-            }
-            System.out.printf("%6.3f ", randomNumbs[i]);
-        }
-    }
-
-    private static void print(String[] gallows, int countTry) {
-        for (int i = 1; i < gallows.length - countTry; i++) {
-            System.out.println(gallows[i]);
-        }
     }
 
     private static void calculateFactorial() {
@@ -105,14 +84,14 @@ public class ArraysTheme {
         }
 
         int countStrings = len;
-        int coutSimbols = 1;
+        int countSymbols = 1;
         while (countStrings > 0) {
-            for (int i = 0; i < coutSimbols; i++) {
+            for (int i = 0; i < countSymbols; i++) {
                 System.out.print(alphabet[len - 1 - i]);
             }
             System.out.println();
             countStrings--;
-            coutSimbols++;
+            countSymbols++;
         }
     }
 
@@ -168,10 +147,10 @@ public class ArraysTheme {
         };
         int lenGallows = gallows.length;
         String[] guessedWords = {"СЛОВО", "КОШКА", "МАШИНА", "МОЛОКО", "КОМПЬЮТЕР"};
-        int lenWords = guessedWords.length;
-        String guessedWord = guessedWords[(int) (Math.random() * lenWords)];
+        int lenArray = guessedWords.length;
+        String guessedWord = guessedWords[(int) (Math.random() * lenArray)];
         StringBuilder maskWord = new StringBuilder("_".repeat(guessedWord.length()));
-        int countTry = lenGallows - 1;
+        int countTries = lenGallows - 1;
         Scanner scan = new Scanner(System.in);
         char inputLetter;
         boolean isGuessedLetter;
@@ -180,24 +159,21 @@ public class ArraysTheme {
         do {
             do {
                 isGuessedLetter = false;
-                if ((lenGallows - 1 - countTry) > 0) {
-                    print(gallows, countTry);
-                }
-                System.out.println(maskWord);
+                print(maskWord);
                 System.out.println("Ошибочные буквы: " + fallLetters);
-                System.out.print("Количество попыток: " + countTry + "\nВводи букву(от А до Я): ");
+                System.out.print("Количество попыток: " + countTries + "\nВведите букву(от А до Я): ");
                 inputLetter = scan.nextLine().charAt(0);
                 System.out.println();
             } while (inputLetter < 'А' || inputLetter > 'Я');
 
-            for (int i = 0; i < lenWords; i++) {
+            for (int i = 0; i < lenArray; i++) {
                 if (inputLetter == guessedWord.charAt(i)) {
                     if (maskWord.charAt(i) != inputLetter) {
                         maskWord.setCharAt(i, inputLetter);
-                        boolean hasAddTry = countTry < lenGallows - 1 &&
+                        boolean hasAddTry = countTries < lenGallows - 1 &&
                                 maskWord.indexOf(String.valueOf(inputLetter)) == i;
                         if (hasAddTry) {
-                            countTry++;
+                            countTries++;
                         }
                     }
                     isGuessedLetter = true;
@@ -207,21 +183,24 @@ public class ArraysTheme {
             boolean isFall = !isGuessedLetter &&
                     !fallLetters.toString().contains(String.valueOf(inputLetter));
             if (isFall) {
-                countTry--;
+                countTries--;
                 fallLetters.append(inputLetter).append(" ");
             }
 
+            if ((lenGallows - 1 - countTries) > 0) {
+                print(gallows, countTries);
+            }
+
             if (guessedWord.contentEquals(maskWord)) {
-                System.out.println("\nТы отгадал слово: " + maskWord);
-                System.out.println("Осталось попыток: " + countTry);
-                if (countTry < 5) {
-                    System.out.println(gallows[lenGallows - 1 - countTry]);
+                System.out.println("\nТы отгадал слово: " + guessedWord);
+                System.out.println("Осталось попыток: " + countTries);
+                if (countTries < lenGallows - 1) {
+                    System.out.println(gallows[lenGallows - 1 - countTries]);
                 }
                 return;
             }
-            if (countTry == 0) {
+            if (countTries == 0) {
                 System.out.println("\nТы не отгадал слово: " + guessedWord);
-                print(gallows, countTry);
                 return;
             }
         } while (!guessedWord.contentEquals(maskWord));
@@ -229,23 +208,27 @@ public class ArraysTheme {
 
     private static void outputTypeWriter() throws InterruptedException {
         System.out.println("\n7. Вывод текста с эффектом пишущей машинки\n");
-        String text1 = "Java -- это C++, из которого убрали все пистолеты, ножи и дубинки. \n" +
-                "-- James Gosling";
+        String text1 = "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. \n" +
+                "- James Gosling";
         String text2 = "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его. \n" +
-                "-- Robert Martin";
+                "- Robert Martin";
         String[] words = text2.split(" ");
-        String[] wordsCopy = new String[words.length];
-        int wordSmallLength = words[0].length();
-        int wordBigLength = 0;
+        int wordMinLength = words[0].length();
+        int wordMaxLength = 0;
         int indexStart = 0;
         int indexEnd = 0;
         
         for (int i = 0; i < words.length; i++) {
-            if (words[i].length() > wordBigLength && !words[i].equals("--")) {
-                wordBigLength = words[i].length();
+            int lenWord = words[i].length();
+            if (words[i].endsWith(".") || words[i].endsWith(",")) {
+                lenWord--;
+            }
+
+            if (lenWord > wordMaxLength && !words[i].equals("-")) {
+                wordMaxLength = lenWord;
                 indexEnd = i;
-            } else if (words[i].length() < wordSmallLength && !words[i].equals("--")) {
-                wordSmallLength = words[i].length();
+            } else if (lenWord < wordMinLength && !words[i].equals("-")) {
+                wordMinLength = lenWord;
                 indexStart = i;
             }
         }
@@ -256,6 +239,8 @@ public class ArraysTheme {
             indexEnd = temp;
         }
 
+
+        String[] wordsCopy = new String[words.length];
         for (int i = 0; i < wordsCopy.length; i++) {
             if (i >= indexStart && i <= indexEnd) {
                 wordsCopy[i] = words[i].toUpperCase();
@@ -265,11 +250,39 @@ public class ArraysTheme {
         }
 
         for (String s : wordsCopy) {
-            for (int j = 0; j < s.length(); j++) {
-                System.out.print(s.charAt(j));
-                Thread.sleep(200);
+            for (int i = 0; i < s.length(); i++) {
+                System.out.print(s.charAt(i));
+                Thread.sleep(100);
             }
             System.out.print(" ");
         }
+    }
+
+    private static void print(int[] reversedNumbs, int len) {
+        for (int i = 0; i < len; i++) {
+            System.out.print(reversedNumbs[i] + (i == len - 1 ? "]" : ", "));
+        }
+    }
+
+    private static void print(float[] randomNumbs, int len) {
+        for (int i = 0; i < len; i++) {
+            if (i == 8) {
+                System.out.println();
+            }
+            System.out.printf("%6.3f ", randomNumbs[i]);
+        }
+    }
+
+    private static void print(String[] gallows, int countTry) {
+        for (int i = 1; i < gallows.length - countTry; i++) {
+            System.out.println(gallows[i]);
+        }
+    }
+
+    private static void print(StringBuilder maskWord) {
+        for (int i = 0; i < maskWord.length(); i++) {
+            System.out.print(maskWord.charAt(i) + " ");
+        }
+        System.out.println();
     }
 }

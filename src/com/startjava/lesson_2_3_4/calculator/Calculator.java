@@ -5,19 +5,12 @@ public class Calculator {
     private int b;
     private char operation;
 
-    public void setA(int a) {
-        this.a = a;
-    }
+    public double calculate(String line) {
+        String[] mathExpression = line.split(" ");
+        a = Integer.parseInt(mathExpression[0]);
+        operation = mathExpression[1].charAt(0);
+        b = Integer.parseInt(mathExpression[2]);
 
-    public void setB(int b) {
-        this.b = b;
-    }
-
-    public void setOperation(char operation) {
-        this.operation = operation;
-    }
-
-    public double calculate() {
         switch (operation) {
             case '+':
                 return a + b;
@@ -34,6 +27,14 @@ public class Calculator {
             default:
                 System.out.println("\nОшибка: знак " + operation + " не поддерживается\n");
                 return Double.NaN;
+        }
+    }
+
+    public void print(double result, String line) {
+        if (result % (int) result > 0) {
+            System.out.printf("%s%.3f", line + " = ", result);
+        } else {
+            System.out.printf("%s%.0f", line + " = ", result);
         }
     }
 }

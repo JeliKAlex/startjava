@@ -6,27 +6,18 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calculatorOne = new Calculator();
         Scanner scan = new Scanner(System.in);
-        String answer;
+        String answer = "yes";
 
         do {
-            System.out.print("\nВведите математическое выражение: ");
-            String line = scan.nextLine();
-            String [] mathExpression = line.split(" ");
-            calculatorOne.setA(Integer.parseInt(mathExpression[0]));
-            calculatorOne.setOperation(mathExpression[1].charAt(0));
-            calculatorOne.setB(Integer.parseInt(mathExpression[2]));
-            double result = calculatorOne.calculate();
-
-            if (result % (int) result > 0) {
-                System.out.printf("%s%.3f", line + " = ", calculatorOne.calculate());
-            } else {
-                System.out.printf("%s%.0f", line + " = ", calculatorOne.calculate());
+            if (answer.equals("yes")) {
+                System.out.print("\nВведите математическое выражение: ");
+                String line = scan.nextLine();
+                double result = calculatorOne.calculate(line);
+                calculatorOne.print(result, line);
             }
 
-            do {
-                System.out.println("\nХотите продолжить вычисления? [yes/no]: ");
-                answer = scan.nextLine();
-            } while (!answer.equals("yes") && !answer.equals("no"));
-        } while (answer.equals("yes"));
+            System.out.println("\nХотите продолжить вычисления? [yes/no]: ");
+            answer = scan.nextLine();
+        } while (!answer.equals("no"));
     }
 }
