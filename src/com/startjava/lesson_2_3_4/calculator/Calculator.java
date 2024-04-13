@@ -1,40 +1,41 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    private int a;
-    private int b;
-    private char operation;
-
-    public double calculate(String line) {
-        String[] mathExpression = line.split(" ");
-        a = Integer.parseInt(mathExpression[0]);
-        operation = mathExpression[1].charAt(0);
-        b = Integer.parseInt(mathExpression[2]);
-
-        switch (operation) {
-            case '+':
-                return a + b;
-            case '-':
-                return a - b;
-            case '*':
-                return a * b;
-            case '/':
-                return (double) a / b;
-            case '%':
-                return a % b;
-            case '^':
-                return Math.pow(a, b);
-            default:
-                System.out.println("\nОшибка: знак " + operation + " не поддерживается\n");
-                return Double.NaN;
+    public static double calculate(String mathExpression) {
+        String[] elements = mathExpression.split(" ");
+        if (elements.length != 3) {
+            throw new RuntimeException("Длина математического выражения должна быть равна 3");
         }
-    }
 
-    public void print(double result, String line) {
-        if (result % (int) result > 0) {
-            System.out.printf("%s%.3f", line + " = ", result);
-        } else {
-            System.out.printf("%s%.0f", line + " = ", result);
+        int a;
+        try {
+            a = Integer.parseInt(elements[0]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Первый аргумент не является целым числом");
         }
+
+        char operation = elements[1].charAt(0);
+
+        int b;
+        try {
+            b = Integer.parseInt(elements[2]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Второй аргумент не является целым числом");
+        }
+
+        if (a <= 0 || b <= 0) {
+            throw new RuntimeException("Числа должны быть положительными");
+        }
+
+        return switch (operation) {
+            case '+' -> a + b;
+            case '-' -> a - b;
+            case '*' -> a * b;
+            case '/' -> (double) a / b;
+            case '%' -> a % b;
+            case '^' -> Math.pow(a, b);
+            default ->
+                throw new RuntimeException("Математическая операция не поддерживается");
+        };
     }
 }
