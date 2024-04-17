@@ -11,7 +11,12 @@ public class CalculatorTest {
             if (answer.equals("yes")) {
                 System.out.print("\nВведите математическое выражение: ");
                 String mathExpression = scan.nextLine();
-                print(Calculator.calculate(mathExpression), mathExpression);
+                try {
+                    print(Calculator.calculate(mathExpression), mathExpression);
+                } catch (RuntimeException e) {
+                    System.out.println(e.getMessage());
+                    continue;
+                }
             }
 
             System.out.println("\nХотите продолжить вычисления? [yes/no]: ");
