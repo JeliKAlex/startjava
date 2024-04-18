@@ -15,7 +15,7 @@ public class Calculator {
             a = Integer.parseInt(elements[0]);
             b = Integer.parseInt(elements[2]);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Аргументами доллжны выступать положительные числа!");
+            throw new RuntimeException("Аргументами должны выступать целые числа!");
         }
 
         if (a <= 0 || b <= 0) {
@@ -29,8 +29,7 @@ public class Calculator {
             case '/' -> (double) a / b;
             case '%' -> a % b;
             case '^' -> Math.pow(a, b);
-            default ->
-                    throw new RuntimeException("Математическая операция не поддерживается!");
+            default -> throw new RuntimeException("Математическая операция не поддерживается!");
         };
     }
 }

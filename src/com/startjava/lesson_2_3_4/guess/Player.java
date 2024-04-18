@@ -4,8 +4,9 @@ import java.util.Arrays;
 
 public class Player {
     private String name;
-    private int countTries = 10;
-    private int[] numbs = new int[countTries];
+    private int countTries = 0;
+    private int len = 10;
+    private int[] numbs = new int[len];
 
     public Player(String name) {
         this.name = name;
@@ -19,34 +20,23 @@ public class Player {
         return countTries;
     }
 
-    public void setCountTries(int countTries) {
-        this.countTries = countTries;
+    public int getLen() {
+        return len;
     }
 
     public int[] getNumbs() {
-        return numbs;
+        return Arrays.copyOf(numbs, (countTries == 0 ? 1 : countTries));
     }
 
-    public void setNumbs(int num, int i) {
+    public void setNumb(int num) {
         if (num > 0 && num <= 100) {
-            this.numbs[i] = num;
+            this.numbs[countTries] = num;
+            countTries++;
         }
     }
 
-    public void printArray() {
-        int[] copyArray = Arrays.copyOf(numbs, numbs.length - countTries);
-        System.out.print("\nЧисла игрока " + name + ":\n");
-        for (int i = 0; i < copyArray.length; i++) {
-            if (copyArray.length / 2 == i) {
-                System.out.println();
-            }
-            System.out.print(copyArray[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public void resetResults() {
-        Arrays.fill(numbs, 0, (numbs.length - countTries), 0);
-        countTries = 10;
+    public void clear() {
+        Arrays.fill(numbs, 0, (countTries), 0);
+        countTries = 0;
     }
 }
