@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class GuessNumber {
     private final Player player1;
     private final Player player2;
-    private int targetNum;
+    private int targetNumb;
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
-    private final int countTries = 10;
+    private final int triesLimit = 10;
+    private int playerNum;
 
     public GuessNumber(String name1, String name2) {
         player1 = new Player(name1);
@@ -17,72 +18,67 @@ public class GuessNumber {
     }
 
     public void start() {
-        targetNum = random.nextInt(100) + 1;
-        System.out.println(targetNum);
+        targetNumb = random.nextInt(100) + 1;
+        System.out.println(targetNumb);
 
-        System.out.println("\nИгра началась! У каждого игрока по " + countTries + " попыток.");
+        System.out.println("\nИгра началась! У каждого игрока по " + triesLimit + " попыток.");
 
         do {
             enterNum(player1);
             if (isGuessed(player1)) {
-                endGame(player1, player2);
                 return;
             }
 
             enterNum(player2);
             if (isGuessed(player2)) {
-                endGame(player1, player2);
                 return;
             }
-        } while (player2.getCountTries() != 10);
-        System.out.println("\nНикому не удалось отгадать число: " + targetNum);
-        endGame(player1, player2);
+        } while (player2.getCountTries() < triesLimit);
+        System.out.println("\nНикому не удалось отгадать число: " + targetNumb);
     }
 
     private void enterNum(Player player) {
-        if (player.getCountTries() < countTries) {
-            int inputNum;
+        if (player.getCountTries() < triesLimit) {
             do {
                 System.out.print("\n" + player.getName() + ", введи число из полуинтервала (0, 100]: ");
-                inputNum = scan.nextInt();
-            } while (inputNum <= 0 || inputNum > 100);
-            player.setNumb(inputNum);
+                playerNum = scan.nextInt();
+            } while (playerNum <= 0 || playerNum > 100);
+            player.addNumb(playerNum);
         }
     }
 
     private boolean isGuessed(Player player) {
-        int playerNum = player.getNumbs()[player.getCountTries() - 1];
-        if (playerNum == targetNum) {
-            System.out.println("\nИгрок " + player.getName() + " угадал  число \"" + targetNum +
+        playerNum = player.getNumb(player.getCountTries() - 1);
+        if (playerNum == targetNumb) {
+            System.out.println("\nИгрок " + player.getName() + " угадал  число \"" + targetNumb +
                     "\" c " + (player.getCountTries()) + " попытки.");
             return true;
         }
 
-        System.out.println("Число " + playerNum + (playerNum > targetNum ? " больше" : " меньше") +
-                " того, что загадал компьютер\n" + "У " + player.getName() +
-                (player.getCountTries() < 10 ? " осталось " + (countTries - player.getCountTries()) +
-                " попыток." : " закончились попытки."));
+        System.out.println("Число " + playerNum + (playerNum > targetNumb ? " больше" : " меньше") +
+                " того, что загадал компьютер");
+        System.out.println("У " + player.getName() + (player.getCountTries() < 10 ? " осталось " +
+                (triesLimit - player.getCountTries()) + " попыток." : " закончились попытки."));
 
         return false;
     }
 
-    private static void endGame(Player player1, Player player2) {
+    public void end() {
         System.out.println("Игра окончена!");
-        printArray(player1);
+        printNumbs(player1);
         player1.clear();
         if (player2.getCountTries() > 0) {
-            printArray(player2);
+            printNumbs(player2);
             player2.clear();
         }
     }
 
-    private static void printArray(Player player) {
+    private static void printNumbs(Player player) {
         System.out.print("\nЧисла игрока " + player.getName() + ":\n");
-        for (int i = 0; i < player.getNumbs().length; i++) {
-            if (player.getLen() / 2 == i) {
-                System.out.println();
-            }
-            System.out.printf("%3d ", player.getNumbs()[i]);
+        int count = 1;
+        for (int numb : player.getNumbs()) {
+            System.out.printf("%3d%s", numb, (count == player.getLen() / 2 ? "\n" : " "));
+            count++;
         }
         System.out.println();
     }

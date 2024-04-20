@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Player {
     private String name;
-    private int countTries = 0;
-    private int len = 10;
-    private int[] numbs = new int[len];
+    private int countTries;
+    private int capacity = 10;
+    private int[] numbs = new int[capacity];
 
     public Player(String name) {
         this.name = name;
@@ -21,22 +21,26 @@ public class Player {
     }
 
     public int getLen() {
-        return len;
+        return capacity;
     }
 
     public int[] getNumbs() {
         return Arrays.copyOf(numbs, (countTries == 0 ? 1 : countTries));
     }
 
-    public void setNumb(int num) {
+    public void addNumb(int num) {
         if (num > 0 && num <= 100) {
             this.numbs[countTries] = num;
             countTries++;
         }
     }
 
+    public int getNumb(int position) {
+        return numbs[position];
+    }
+
     public void clear() {
-        Arrays.fill(numbs, 0, (countTries), 0);
+        Arrays.fill(numbs, 0, countTries, 0);
         countTries = 0;
     }
 }
