@@ -3,12 +3,12 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
-    private String name;
-    private int countTries;
-    private int capacity = 10;
-    private int[] numbs = new int[capacity];
+    private final String name;
+    private int triesCount;
+    private final int capacity = 10;
+    private final int[] numbs = new int[capacity];
 
-    private int winCount;
+    private int score;
 
     public Player(String name) {
         this.name = name;
@@ -19,37 +19,37 @@ public class Player {
     }
 
     public int getCountTries() {
-        return countTries;
+        return triesCount;
     }
 
     public int[] getNumbs() {
-        return Arrays.copyOf(numbs, (countTries == 0 ? 1 : countTries));
+        return Arrays.copyOf(numbs, (triesCount == 0 ? 1 : triesCount));
+    }
+
+    public int getNumb() {
+        return numbs[triesCount - 1];
     }
 
     public boolean addNumb(int num) {
         if (num > 0 && num <= 100) {
-            this.numbs[countTries] = num;
-            countTries++;
+            numbs[triesCount] = num;
+            triesCount++;
             return true;
         }
-        System.out.println("Ввёденное Вами число не соответсвует требованию, повторите ввод!");
+        System.out.println("Введенное Вами число не соответствует требованию, повторите ввод!");
         return false;
     }
 
     public int getWinCount() {
-        return winCount;
+        return score;
     }
 
     public void setWinCount(int winCount) {
-        this.winCount = winCount;
-    }
-
-    public int getNumb(int position) {
-        return numbs[position];
+        this.score = winCount;
     }
 
     public void clear() {
-        Arrays.fill(numbs, 0, countTries, 0);
-        countTries = 0;
+        Arrays.fill(numbs, 0, triesCount, 0);
+        triesCount = 0;
     }
 }

@@ -3,17 +3,15 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Scanner;
 
 public class GuessNumberTest {
+    public static Scanner scan = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        String[] names = new String[3];
+        names[0] = inputName("Первый ");
+        names[1] = inputName("Второй ");
+        names[2] = inputName("Третий ");
 
-        System.out.println("Первый игрок, представьтесь!");
-        String name1 = scan.nextLine();
-        System.out.println("Второй игрок, представьтесь!");
-        String name2 = scan.nextLine();
-        System.out.println("Третий игрок, представьтесь!");
-        String name3 = scan.nextLine();
-
-        GuessNumber game = new GuessNumber(name1, name2, name3);
+        GuessNumber game = new GuessNumber(names);
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
@@ -22,5 +20,10 @@ public class GuessNumberTest {
             System.out.println("\n\nХотите продолжить игру? [yes/no]: ");
             answer = scan.nextLine();
         } while (!answer.equals("no"));
+    }
+
+    public static String inputName(String numb) {
+        System.out.println(numb + "игрок, представьтесь!");
+        return scan.nextLine();
     }
 }

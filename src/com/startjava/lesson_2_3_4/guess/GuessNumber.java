@@ -4,17 +4,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
-    private  Player[] players = new Player[3];
+    private final Player[] players = new Player[3];
     private int targetNumb;
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
     private final int triesLimit = 10;
     private int rounds;
 
-    public GuessNumber(String name1, String name2, String name3) {
-        players[0] = new Player(name1);
-        players[1] = new Player(name2);
-        players[2] = new Player(name3);
+    public GuessNumber(String[] names) {
+        for (int i = 0; i < players.length; i++) {
+            players[i] = new Player(names[i]);
+        }
     }
 
     public void start() {
@@ -43,7 +43,18 @@ public class GuessNumber {
             }
         } while (players[players.length - 1].getCountTries() < triesLimit);
         System.out.println("\nНикому не удалось отгадать число: " + targetNumb);
-        gameOver();
+        endGame();
+    }
+
+    private void shuffle() {
+        int n = players.length;
+        for (int i = n - 1; i >= 1; i--) {
+            int j = random.nextInt(i + 1);
+
+            Player tmp = players[i];
+            players[i] = players[j];
+            players[j] = tmp;
+        }
     }
 
     private void enterNumb(Player player) {
@@ -53,16 +64,18 @@ public class GuessNumber {
                 System.out.print("\n" + player.getName() + ", введи число из полуинтервала (0, 100]: ");
                 playerNum = scan.nextInt();
             } while (!player.addNumb(playerNum));
+        } else {
+            System.out.println("\nУ " + player.getName() + "закончились попытки!");
         }
     }
 
     private boolean isGuessed(Player player) {
-        int playerNum = player.getNumb(player.getCountTries() - 1);
+        int playerNum = player.getNumb();
         if (playerNum == targetNumb) {
             System.out.println("\nИгрок " + player.getName() + " угадал  число \"" + targetNumb +
                     "\" c " + (player.getCountTries()) + " попытки.");
             player.setWinCount(player.getWinCount() + 1);
-            gameOver();
+            endGame();
             return true;
         }
 
@@ -74,7 +87,7 @@ public class GuessNumber {
         return false;
     }
 
-    private void gameOver() {
+    private void endGame() {
         System.out.println("Игра окончена!");
         for (Player player : players) {
             if (player.getCountTries() > 0) {
@@ -91,17 +104,6 @@ public class GuessNumber {
             System.out.printf("%3d%s", numb, " ");
         }
         System.out.println();
-    }
-
-    private void shuffle() {
-        int n = players.length;
-        for (int i = n - 1; i >= 1; i--) {
-            int j = random.nextInt(i + 1);
-
-            Player tmp = players[i];
-            players[i] = players[j];
-            players[j] = tmp;
-        }
     }
 
     private void defineWinner() {
