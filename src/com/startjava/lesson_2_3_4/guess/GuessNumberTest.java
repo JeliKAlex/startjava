@@ -6,10 +6,11 @@ public class GuessNumberTest {
     public static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String[] names = new String[3];
-        names[0] = inputName("Первый ");
-        names[1] = inputName("Второй ");
-        names[2] = inputName("Третий ");
+        String[] index = {"Первый ", "Второй ", "Третий "};
+        String[] names = new String[index.length];
+        for (int i = 0; i < names.length; i++) {
+            names[i] = inputName(index[i]);
+        }
 
         GuessNumber game = new GuessNumber(names);
         String answer = "yes";

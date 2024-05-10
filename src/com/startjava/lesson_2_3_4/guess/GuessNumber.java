@@ -4,11 +4,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
+    private static final int TRIES_LIMIT = 10;
     private final Player[] players = new Player[3];
-    private int targetNumb;
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
-    private final int triesLimit = 10;
+    private int targetNumb;
     private int rounds;
 
     public GuessNumber(String[] names) {
@@ -25,6 +25,7 @@ public class GuessNumber {
         shuffle();
         while (rounds < 3) {
             startRound();
+            endGame();
         }
         defineWinner();
     }
@@ -33,57 +34,46 @@ public class GuessNumber {
         targetNumb = random.nextInt(100) + 1;
         System.out.println("\n" + targetNumb);
 
-        System.out.println("\nИгра началась! У каждого игрока по " + triesLimit + " попыток.\n" +
+        System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
                     (rounds + 1) + " раунд.");
 
         do {
             for (Player player : players) {
-                enterNumb(player);
+                if (player.getCountTries() < TRIES_LIMIT) enterNumb(player);
                 if (isGuessed(player)) return;
             }
-        } while (players[players.length - 1].getCountTries() < triesLimit);
+        } while (players[players.length - 1].getCountTries() < TRIES_LIMIT);
         System.out.println("\nНикому не удалось отгадать число: " + targetNumb);
-        endGame();
     }
 
     private void shuffle() {
-        int n = players.length;
-        for (int i = n - 1; i >= 1; i--) {
-            int j = random.nextInt(i + 1);
+        int length = players.length;
+        for (int i = length - 1; i >= 1; i--) {
+            int randomNumb = random.nextInt(i + 1);
 
             Player tmp = players[i];
-            players[i] = players[j];
-            players[j] = tmp;
+            players[i] = players[randomNumb];
+            players[randomNumb] = tmp;
         }
     }
 
     private void enterNumb(Player player) {
-        if (player.getCountTries() < triesLimit) {
-            int playerNum;
-            do {
-                System.out.print("\n" + player.getName() + ", введи число из полуинтервала (0, 100]: ");
-                playerNum = scan.nextInt();
-            } while (!player.addNumb(playerNum));
-        } else {
-            System.out.println("\nУ " + player.getName() + "закончились попытки!");
-        }
+        int playerNumb;
+        do {
+            System.out.print("\n" + player.getName() + ", введи число из полуинтервала (0, 100]: ");
+            playerNumb = scan.nextInt();
+        } while (!player.addNumb(playerNumb));
     }
 
     private boolean isGuessed(Player player) {
-        int playerNum = player.getNumb();
-        if (playerNum == targetNumb) {
+        if (player.getNumb() == targetNumb) {
             System.out.println("\nИгрок " + player.getName() + " угадал  число \"" + targetNumb +
                     "\" c " + (player.getCountTries()) + " попытки.");
             player.setWinCount(player.getWinCount() + 1);
-            endGame();
             return true;
         }
 
-        System.out.println("Число " + playerNum + (playerNum > targetNumb ? " больше" : " меньше") +
-                " того, что загадал компьютер");
-        System.out.println("У " + player.getName() + (player.getCountTries() < triesLimit ? " осталось " +
-                (triesLimit - player.getCountTries()) + " попыток." : " закончились попытки."));
-
+        checkTries(player);
         return false;
     }
 
@@ -96,6 +86,14 @@ public class GuessNumber {
             }
         }
         rounds++;
+    }
+
+    private void checkTries(Player player) {
+        int playerNum = player.getNumb();
+        System.out.println("Число " + playerNum + (playerNum > targetNumb ? " больше" : " меньше") +
+                " того, что загадал компьютер");
+        System.out.println("У " + player.getName() + (player.getCountTries() < TRIES_LIMIT ? " осталось " +
+                (TRIES_LIMIT - player.getCountTries()) + " попыток." : " закончились попытки."));
     }
 
     private static void printNumbs(Player player) {

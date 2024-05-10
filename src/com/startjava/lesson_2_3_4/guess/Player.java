@@ -4,10 +4,8 @@ import java.util.Arrays;
 
 public class Player {
     private final String name;
+    private final int[] numbs = new int[10];
     private int triesCount;
-    private final int capacity = 10;
-    private final int[] numbs = new int[capacity];
-
     private int score;
 
     public Player(String name) {
