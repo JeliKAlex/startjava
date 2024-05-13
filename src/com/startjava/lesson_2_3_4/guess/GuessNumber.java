@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 public class GuessNumber {
     private static final int TRIES_LIMIT = 10;
-    private final Player[] players = new Player[3];
+    private static final int QUANTITY_PLAYERS = 3;
+    private static final int LIMIT_TARGET_NUMB = 100;
+    private final Player[] players = new Player[QUANTITY_PLAYERS];
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
     private int targetNumb;
@@ -31,7 +33,7 @@ public class GuessNumber {
     }
 
     public void startRound() {
-        targetNumb = random.nextInt(100) + 1;
+        targetNumb = random.nextInt(LIMIT_TARGET_NUMB) + 1;
         System.out.println("\n" + targetNumb);
 
         System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
@@ -66,13 +68,16 @@ public class GuessNumber {
     }
 
     private boolean isGuessed(Player player) {
-        if (player.getNumb() == targetNumb) {
+        int playerNum = player.getNumb();
+        if (playerNum == targetNumb) {
             System.out.println("\nИгрок " + player.getName() + " угадал  число \"" + targetNumb +
                     "\" c " + (player.getCountTries()) + " попытки.");
             player.setWinCount(player.getWinCount() + 1);
             return true;
         }
 
+        System.out.println("Число " + playerNum + (playerNum > targetNumb ? " больше" : " меньше") +
+                " того, что загадал компьютер");
         checkTries(player);
         return false;
     }
@@ -89,9 +94,6 @@ public class GuessNumber {
     }
 
     private void checkTries(Player player) {
-        int playerNum = player.getNumb();
-        System.out.println("Число " + playerNum + (playerNum > targetNumb ? " больше" : " меньше") +
-                " того, что загадал компьютер");
         System.out.println("У " + player.getName() + (player.getCountTries() < TRIES_LIMIT ? " осталось " +
                 (TRIES_LIMIT - player.getCountTries()) + " попыток." : " закончились попытки."));
     }

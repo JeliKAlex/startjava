@@ -6,13 +6,7 @@ public class GuessNumberTest {
     public static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String[] index = {"Первый ", "Второй ", "Третий "};
-        String[] names = new String[index.length];
-        for (int i = 0; i < names.length; i++) {
-            names[i] = inputName(index[i]);
-        }
-
-        GuessNumber game = new GuessNumber(names);
+        GuessNumber game = new GuessNumber(inputName());
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
@@ -23,8 +17,13 @@ public class GuessNumberTest {
         } while (!answer.equals("no"));
     }
 
-    public static String inputName(String numb) {
-        System.out.println(numb + "игрок, представьтесь!");
-        return scan.nextLine();
+    public static String[] inputName() {
+        String[] index = {"Первый ", "Второй ", "Третий "};
+        String[] names = new String[index.length];
+        for (int i = 0; i < names.length; i++) {
+            System.out.println(index[i] + "игрок, представьтесь!");
+            names[i] = scan.nextLine();
+        }
+        return names;
     }
 }

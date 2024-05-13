@@ -3,8 +3,10 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
+    private static final int QUANTITY_NUMBS = 10;
+    private static final int LIMIT_TARGET_NUMB = 100;
     private final String name;
-    private final int[] numbs = new int[10];
+    private final int[] numbs = new int[QUANTITY_NUMBS];
     private int triesCount;
     private int score;
 
@@ -29,7 +31,7 @@ public class Player {
     }
 
     public boolean addNumb(int num) {
-        if (num > 0 && num <= 100) {
+        if (num > 0 && num <= LIMIT_TARGET_NUMB) {
             numbs[triesCount] = num;
             triesCount++;
             return true;
