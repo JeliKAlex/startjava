@@ -4,14 +4,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
+    private static final int PLAYERS_LIMIT = 3;
+    private static final int ROUNDS_LIMIT = 3;
+    private static final int TARGET_NUMB_LIMIT = 100;
     private static final int TRIES_LIMIT = 10;
-    private static final int QUANTITY_PLAYERS = 3;
-    private static final int LIMIT_TARGET_NUMB = 100;
-    private final Player[] players = new Player[QUANTITY_PLAYERS];
+    private final Player[] players = new Player[PLAYERS_LIMIT];
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
     private int targetNumb;
-    private int rounds;
+    private int currentRound;
 
     public GuessNumber(String[] names) {
         for (int i = 0; i < players.length; i++) {
@@ -20,12 +21,12 @@ public class GuessNumber {
     }
 
     public void start() {
-        rounds = 0;
+        currentRound = 0;
         for (Player player : players) {
             player.setWinCount(0);
         }
         shuffle();
-        while (rounds < 3) {
+        while (currentRound < ROUNDS_LIMIT) {
             startRound();
             endGame();
         }
@@ -33,11 +34,11 @@ public class GuessNumber {
     }
 
     public void startRound() {
-        targetNumb = random.nextInt(LIMIT_TARGET_NUMB) + 1;
+        targetNumb = random.nextInt(TARGET_NUMB_LIMIT) + 1;
         System.out.println("\n" + targetNumb);
 
         System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
-                    (rounds + 1) + " раунд.");
+                    (currentRound + 1) + " раунд.");
 
         do {
             for (Player player : players) {
@@ -90,7 +91,7 @@ public class GuessNumber {
                 player.clear();
             }
         }
-        rounds++;
+        currentRound++;
     }
 
     private void checkTries(Player player) {
@@ -117,7 +118,7 @@ public class GuessNumber {
                 }
             }
         }
-        System.out.println("\nПо итогам " + rounds + " раундов");
+        System.out.println("\nПо итогам " + currentRound + " раундов");
         Player winner = players[len - 1];
         if (winner.getWinCount() == 0) {
             System.out.println("Никто ни разу не угадал число..");
