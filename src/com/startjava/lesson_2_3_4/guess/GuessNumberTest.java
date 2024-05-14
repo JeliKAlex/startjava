@@ -6,7 +6,7 @@ public class GuessNumberTest {
     public static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        GuessNumber game = new GuessNumber(inputName());
+        GuessNumber game = new GuessNumber(inputNames());
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
@@ -17,11 +17,11 @@ public class GuessNumberTest {
         } while (!answer.equals("no"));
     }
 
-    public static String[] inputName() {
-        String[] index = {"Первый ", "Второй ", "Третий "};
-        String[] names = new String[index.length];
+    public static String[] inputNames() {
+        String[] serialNumb = {"Первый ", "Второй ", "Третий "};
+        String[] names = new String[serialNumb.length];
         for (int i = 0; i < names.length; i++) {
-            System.out.println(index[i] + "игрок, представьтесь!");
+            System.out.println(serialNumb[i] + "игрок, представьтесь!");
             names[i] = scan.nextLine();
         }
         return names;

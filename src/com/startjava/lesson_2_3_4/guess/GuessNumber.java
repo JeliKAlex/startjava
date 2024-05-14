@@ -6,13 +6,21 @@ import java.util.Scanner;
 public class GuessNumber {
     private static final int PLAYERS_LIMIT = 3;
     private static final int ROUNDS_LIMIT = 3;
-    private static final int TARGET_NUMB_LIMIT = 100;
+    private static final int END_RANGE = 100;
     private static final int TRIES_LIMIT = 10;
     private final Player[] players = new Player[PLAYERS_LIMIT];
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
     private int targetNumb;
     private int currentRound;
+
+    public static int getEndRange() {
+        return END_RANGE;
+    }
+
+    public static int getTriesLimit() {
+        return TRIES_LIMIT;
+    }
 
     public GuessNumber(String[] names) {
         for (int i = 0; i < players.length; i++) {
@@ -28,25 +36,9 @@ public class GuessNumber {
         shuffle();
         while (currentRound < ROUNDS_LIMIT) {
             startRound();
-            endGame();
+            endRound();
         }
         defineWinner();
-    }
-
-    public void startRound() {
-        targetNumb = random.nextInt(TARGET_NUMB_LIMIT) + 1;
-        System.out.println("\n" + targetNumb);
-
-        System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
-                    (currentRound + 1) + " раунд.");
-
-        do {
-            for (Player player : players) {
-                if (player.getCountTries() < TRIES_LIMIT) enterNumb(player);
-                if (isGuessed(player)) return;
-            }
-        } while (players[players.length - 1].getCountTries() < TRIES_LIMIT);
-        System.out.println("\nНикому не удалось отгадать число: " + targetNumb);
     }
 
     private void shuffle() {
@@ -58,6 +50,22 @@ public class GuessNumber {
             players[i] = players[randomNumb];
             players[randomNumb] = tmp;
         }
+    }
+
+    public void startRound() {
+        targetNumb = random.nextInt(END_RANGE) + 1;
+        System.out.println("\n" + targetNumb);
+
+        System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
+                    (currentRound + 1) + " раунд.");
+
+        do {
+            for (Player player : players) {
+                enterNumb(player);
+                if (isGuessed(player)) return;
+            }
+        } while (players[players.length - 1].getCountTries() < TRIES_LIMIT);
+        System.out.println("\nНикому не удалось отгадать число: " + targetNumb);
     }
 
     private void enterNumb(Player player) {
@@ -83,26 +91,26 @@ public class GuessNumber {
         return false;
     }
 
-    private void endGame() {
-        System.out.println("Игра окончена!");
-        for (Player player : players) {
-            if (player.getCountTries() > 0) {
-                printNumbs(player);
-                player.clear();
-            }
-        }
-        currentRound++;
-    }
-
     private void checkTries(Player player) {
         System.out.println("У " + player.getName() + (player.getCountTries() < TRIES_LIMIT ? " осталось " +
                 (TRIES_LIMIT - player.getCountTries()) + " попыток." : " закончились попытки."));
     }
 
+    private void endRound() {
+        System.out.println("Раунд окончен!");
+        for (Player player : players) {
+            printNumbs(player);
+            player.clear();
+        }
+        currentRound++;
+    }
+
     private static void printNumbs(Player player) {
-        System.out.print("\nЧисла игрока " + player.getName() + ":\n");
+        System.out.println("\nЧисла игрока " + player.getName() + ":");
         for (int numb : player.getNumbs()) {
-            System.out.printf("%3d%s", numb, " ");
+            if (numb > 0) {
+                System.out.printf("%3d%s", numb, " ");
+            }
         }
         System.out.println();
     }
