@@ -104,9 +104,9 @@ public class GuessNumber {
     private static void printNumbs(Player player) {
         System.out.println("\nЧисла игрока " + player.getName() + ":");
         for (int numb : player.getNumbs()) {
-            //if (numb > 0) {
+            if (numb > 0) {
                 System.out.printf("%3d%s", numb, " ");
-            //}
+            }
         }
         System.out.println();
     }
