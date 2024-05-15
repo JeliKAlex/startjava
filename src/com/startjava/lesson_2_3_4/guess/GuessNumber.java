@@ -6,21 +6,13 @@ import java.util.Scanner;
 public class GuessNumber {
     private static final int PLAYERS_LIMIT = 3;
     private static final int ROUNDS_LIMIT = 3;
-    private static final int END_RANGE = 100;
-    private static final int TRIES_LIMIT = 10;
+    public static final int END_RANGE = 100;
+    public static final int TRIES_LIMIT = 10;
     private final Player[] players = new Player[PLAYERS_LIMIT];
     private final Random random = new Random();
     private final Scanner scan = new Scanner(System.in);
     private int targetNumb;
     private int currentRound;
-
-    public static int getEndRange() {
-        return END_RANGE;
-    }
-
-    public static int getTriesLimit() {
-        return TRIES_LIMIT;
-    }
 
     public GuessNumber(String[] names) {
         for (int i = 0; i < players.length; i++) {
@@ -29,16 +21,20 @@ public class GuessNumber {
     }
 
     public void start() {
-        currentRound = 0;
-        for (Player player : players) {
-            player.setWinCount(0);
-        }
+        resetCount();
         shuffle();
         while (currentRound < ROUNDS_LIMIT) {
             startRound();
             endRound();
         }
         defineWinner();
+    }
+
+    private void resetCount() {
+        currentRound = 0;
+        for (Player player : players) {
+            player.setWinCount(0);
+        }
     }
 
     private void shuffle() {
@@ -57,7 +53,7 @@ public class GuessNumber {
         System.out.println("\n" + targetNumb);
 
         System.out.println("\nИгра началась! У каждого игрока по " + TRIES_LIMIT + " попыток.\n" +
-                    (currentRound + 1) + " раунд.");
+                (currentRound + 1) + " раунд.");
 
         do {
             for (Player player : players) {
@@ -108,9 +104,9 @@ public class GuessNumber {
     private static void printNumbs(Player player) {
         System.out.println("\nЧисла игрока " + player.getName() + ":");
         for (int numb : player.getNumbs()) {
-            if (numb > 0) {
+            //if (numb > 0) {
                 System.out.printf("%3d%s", numb, " ");
-            }
+            //}
         }
         System.out.println();
     }

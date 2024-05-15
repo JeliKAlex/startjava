@@ -1,13 +1,13 @@
 package com.startjava.lesson_2_3_4.guess;
 
-import static com.startjava.lesson_2_3_4.guess.GuessNumber.getEndRange;
-import static com.startjava.lesson_2_3_4.guess.GuessNumber.getTriesLimit;
+import static com.startjava.lesson_2_3_4.guess.GuessNumber.END_RANGE;
+import static com.startjava.lesson_2_3_4.guess.GuessNumber.TRIES_LIMIT;
 
 import java.util.Arrays;
 
 public class Player {
     private final String name;
-    private final int[] numbs = new int[getTriesLimit()];
+    private final int[] numbs = new int[TRIES_LIMIT];
     private int triesCount;
     private int score;
 
@@ -32,7 +32,7 @@ public class Player {
     }
 
     public boolean addNumb(int num) {
-        if (num > 0 && num <= getEndRange()) {
+        if (num > 0 && num <= END_RANGE) {
             numbs[triesCount] = num;
             triesCount++;
             return true;

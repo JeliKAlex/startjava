@@ -3,9 +3,8 @@ package com.startjava.lesson_2_3_4.rps;
 import java.util.Random;
 import java.util.Scanner;
 
-//Игра Камень-Ножницы-Бумага
+// Игра Камень-Ножницы-Бумага
 public class RpsGameFormatting {
-
     private static final String ROCK = "R";
     private static final String SCISSORS = "S";
     private static final String PAPER = "P";
@@ -16,12 +15,12 @@ public class RpsGameFormatting {
         String name2 = inputName(console);
         Random r = new Random();
 
-        //Ход первого игрока
+        // Ход первого игрока
         int position = generatePosition(name1, r);
         String sign1 = defineSign(position);
         showSigns(sign1);
 
-        //Ход второго игрока
+        // Ход второго игрока
         position = generatePosition(name2, r);
         String sign2 = defineSign(position);
         showSigns(sign2);
