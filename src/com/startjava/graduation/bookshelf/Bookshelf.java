@@ -9,7 +9,7 @@ public class Bookshelf {
     private int lenShelf;
 
     public Book[] getBooks() {
-        return books;
+        return Arrays.copyOf(books, (quantityBooks == 0 ? 0 : quantityBooks));
     }
 
     public int getQuantityBooks() {
@@ -24,53 +24,49 @@ public class Bookshelf {
         return lenShelf;
     }
 
-    public void addBook(Book book) {
+    public void add(Book book) {
         books[quantityBooks] = book;
         quantityBooks++;
         calculateLenShelf();
     }
 
-    private void calculateLenShelf() {
-        for (Book book : books) {
-            if (book != null) {
-                if (book.getLenInform() > lenShelf) lenShelf = book.getLenInform();
-            }
-        }
-    }
-
-    public int deleteBook(String name) {
+    public boolean delete(String title) {
         int len = QUANTITY_SHELVES;
         for (int i = 0; i < len; i++) {
-            if (name.equals(books[i].getTitle())) {
-                int deletedLen = books[i].getLenInform();
-                if (i == 0) {
-                    System.arraycopy(books, 1, books, 0, len - 1);
-                } else if (i < len - 1) {
-                    System.arraycopy(books, 0, books, 0, i);
-                    System.arraycopy(books, i + 1, books, i, len - i - 1);
-                }
+            if (books[i] != null && title.equals(books[i].getTitle())) {
+                int deletedLen = books[i].getLenInfo();
+                System.arraycopy(books, i + 1, books, i, len - 1 - i);
                 books[len - 1] = null;
                 if (deletedLen == lenShelf) {
+                    lenShelf = 0;
                     calculateLenShelf();
                 }
                 quantityBooks--;
-                return 1;
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 
-    public int searchBook(String name) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getTitle().equals(name)) {
-                return i + 1;
+    public Book search(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                return book;
             }
         }
-        return 0;
+        return null;
     }
 
     public void clearShelf() {
         Arrays.fill(books, 0, quantityBooks, null);
         quantityBooks = 0;
+    }
+
+    private void calculateLenShelf() {
+        for (Book book : books) {
+            if (book != null) {
+                if (book.getLenInfo() > lenShelf) lenShelf = book.getLenInfo();
+            }
+        }
     }
 }
