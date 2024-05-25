@@ -27,21 +27,21 @@ public class Bookshelf {
     public void add(Book book) {
         books[quantityBooks] = book;
         quantityBooks++;
-        calculateLenShelf();
+        updateLenShelf();
     }
 
     public boolean delete(String title) {
         int len = QUANTITY_SHELVES;
-        for (int i = 0; i < len; i++) {
-            if (books[i] != null && title.equals(books[i].getTitle())) {
-                int deletedLen = books[i].getLenInfo();
+        for (int i = 0; i < quantityBooks; i++) {
+            if (title.equals(books[i].getTitle())) {
+                final int deletedLen = books[i].getLenInfo();
                 System.arraycopy(books, i + 1, books, i, len - 1 - i);
                 books[len - 1] = null;
+                quantityBooks--;
                 if (deletedLen == lenShelf) {
                     lenShelf = 0;
-                    calculateLenShelf();
+                    updateLenShelf();
                 }
-                quantityBooks--;
                 return true;
             }
         }
@@ -62,10 +62,12 @@ public class Bookshelf {
         quantityBooks = 0;
     }
 
-    private void calculateLenShelf() {
-        for (Book book : books) {
-            if (book != null) {
-                if (book.getLenInfo() > lenShelf) lenShelf = book.getLenInfo();
+    private void updateLenShelf() {
+        if (quantityBooks == 1) {
+            lenShelf = books[0].getLenInfo();
+        } else {
+            for (int i = 1; i < quantityBooks; i++) {
+                lenShelf = Math.max(books[i - 1].getLenInfo(), books[i].getLenInfo());
             }
         }
     }

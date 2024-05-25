@@ -3,13 +3,13 @@ package com.startjava.graduation.bookshelf;
 public class Book {
     private final String author;
     private final String title;
-    private final int year;
+    private final int releaseYear;
     private final int lenInfo;
 
     public Book(String author, String title, int year) {
         this.author = author;
         this.title = title;
-        this.year = year;
+        this.releaseYear = year;
         lenInfo = toString().length();
     }
 
@@ -23,6 +23,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return author + ", " + title + ", " + year;
+        return author + ", " + title + ", " + releaseYear;
     }
 }
