@@ -7,20 +7,14 @@ public class BookshelfTest {
 
     public static void main(String[] args) {
         Bookshelf bookshelf = new Bookshelf();
-        start(bookshelf);
-    }
-
-    private static void start(Bookshelf bookshelf) {
-        String input = "";
+        int item = 0;
         do {
             showBookshelf(bookshelf);
             printMenu();
-            int choice = scan.nextInt();
-            scan.nextLine();
-            input = inputProcess(choice, bookshelf, input);
-            System.out.println("\nДля продолжения нажмите Enter\n");
-            scan.nextLine();
-        } while (!input.equals("5"));
+            int choice = inputChoice();
+            item = doAction(choice, bookshelf, item);
+            printContinue();
+        } while (item != 5);
     }
 
     private static void showBookshelf(Bookshelf bookshelf) {
@@ -48,7 +42,7 @@ public class BookshelfTest {
                     """);
     }
 
-    private static String inputProcess(int choice, Bookshelf bookshelf, String input) {
+    private static int doAction(int choice, Bookshelf bookshelf, int item) {
         switch (choice) {
             case 1 -> add(bookshelf);
             case 2 -> delete(bookshelf);
@@ -57,10 +51,10 @@ public class BookshelfTest {
                 bookshelf.clearShelf();
                 System.out.println("Шкаф очищен!");
             }
-            case 5 -> input = "5";
+            case 5 -> item = 5;
             default -> System.out.println("Некорректный ввод");
         }
-        return input;
+        return item;
     }
 
     private static void add(Bookshelf bookshelf) {
@@ -90,6 +84,18 @@ public class BookshelfTest {
         } else {
             System.out.println("Книга не найдена!");
         }
+    }
+
+    private static int inputChoice() {
+        System.out.println("Для выбора пункта меню, введите соответствующий номер: ");
+        int choice = scan.nextInt();
+        scan.nextLine();
+        return choice;
+    }
+
+    private static void printContinue() {
+        System.out.println("\nДля продолжения нажмите Enter\n");
+        scan.nextLine();
     }
 
     private static String inputTitle() {
