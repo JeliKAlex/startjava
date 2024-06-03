@@ -14,15 +14,13 @@ SELECT *
 \echo 'Только роботы серии Mark-1 и Mark-4';
 SELECT *
   FROM Jaegers
- WHERE mark
-    IN ('Mark-1', 'Mark-4')
+ WHERE mark IN ('Mark-1', 'Mark-4')
  ORDER BY model_name;
 
-\echo 'Всех роботов, кроме Mark-1 и Mark-4 отсортировав по убыванию по столбцу mark';
+\echo 'Всех роботов, кроме Mark-1 и Mark-4, отсортировав по убыванию по столбцу mark';
 SELECT *
   FROM Jaegers
- WHERE mark
-   NOT IN ('Mark-1', 'Mark-4')
+ WHERE mark NOT IN ('Mark-1', 'Mark-4')
  ORDER BY mark DESC;
 
 \echo 'Информация о самых старых роботах(3)';
@@ -54,7 +52,7 @@ SELECT *
 
 \echo 'Удалите уничтоженных роботов, а затем отобразите оставшихся';
 DELETE FROM Jaegers
-      WHERE status = 'Destroyed';
+ WHERE status = 'Destroyed';
 
 SELECT *
   FROM Jaegers
